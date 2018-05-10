@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.2">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
     
     
       
@@ -375,9 +375,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#savefig-png" title="savefig / png" class="md-nav__link">
-    savefig / png
+  <a href="#savefig-format" title="savefig / format" class="md-nav__link">
+    savefig / format
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-formats-supported-by-most-graphical-backends" title="File formats supported by most graphical backends" class="md-nav__link">
+    File formats supported by most graphical backends
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-output-file-formats" title="Supported output file formats" class="md-nav__link">
+    Supported output file formats
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -691,9 +711,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#savefig-png" title="savefig / png" class="md-nav__link">
-    savefig / png
+  <a href="#savefig-format" title="savefig / format" class="md-nav__link">
+    savefig / format
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-formats-supported-by-most-graphical-backends" title="File formats supported by most graphical backends" class="md-nav__link">
+    File formats supported by most graphical backends
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-output-file-formats" title="Supported output file formats" class="md-nav__link">
+    Supported output file formats
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -735,14 +775,31 @@
 <h3 id="juno-atom">Juno / Atom</h3>
 <p>Plots are shown in the Atom PlotPane when possible, either when returned to the console or to an inline code block. At any time, the plot can be opened in a standalone window using the <code>gui()</code> command. The default behavior can be switched to match the REPL behavior (i.e. opening a standalone window) by setting <code>ENV["PLOTS_USE_ATOM_PLOTPANE"] = "false"</code> before loading Plots.</p>
 <p>Note that javascript-based libraries (for example: PlotlyJS) cannot be shown in the PlotPane due to issues within Atom's internals.</p>
-<p><a id='savefig-/-png-1'></a></p>
-<h3 id="savefig-png">savefig / png</h3>
-<p>Save the most recent plot, choosing file type automatically by the extension.</p>
-<div class="code"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<p><a id='savefig-/-format-1'></a></p>
+<h3 id="savefig-format">savefig / format</h3>
+<p>Plots support 2 different versions per save-command. Command <code>savefig</code> chooses file type automatically based on the file extension.</p>
+<div class="code"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the most recent fig as fn</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">plot_ref</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="c"># save the fig referenced by plot_ref as fn</span>
 </pre></div>
 
 
-<p>There are also shorthands <code>png(fn)</code>, etc.  You don't need the file extension for those.</p>
+<p>In addition, Plots offers shorthands like <code>png(fn)</code>, etc. In this case the string fn containing the filename does not need a file extension.</p>
+<div class="code"><pre><span></span><span class="n">png</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the current fig as png with filename fn</span>
+<span class="n">png</span><span class="p">(</span><span class="n">plot_ref</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="c"># save the fig referenced by plot_ref as png with filename fn</span>
+</pre></div>
+
+
+<p><a id='File-formats-supported-by-most-graphical-backends-1'></a></p>
+<h4 id="file-formats-supported-by-most-graphical-backends">File formats supported by most graphical backends</h4>
+<ul>
+<li>png (default output format)</li>
+<li>svg</li>
+<li>PDF</li>
+</ul>
+<p><a id='Supported-output-file-formats-1'></a></p>
+<h4 id="supported-output-file-formats">Supported output file formats</h4>
+<p>Note:   not all backends support every output file format ! A simple table showing which format is supported by which backend</p>
+<p>| format | backends |  |––––|–––––|  | eps | inspectdr, plotlyjs, pyplot |  | html | plotly,  plotlyjs |  | pdf | gr, inspectdr, pgfplots, plotlyjs, pyplot |  | png | glvisualize, gr, inspectdr, plotly, plotlyjs, pyplot |  | ps | gr, pyplot |  | svg | gr, inspectdr, pgfplots, plotly, plotlyjs, pyplot |  | tex | pgfplots |  | text | hdf5, unicodeplots |</p>
                 
                   
                 
