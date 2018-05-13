@@ -474,8 +474,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recipe-syntaxrules" title="Recipe Syntax/Rules" class="md-nav__link">
-    Recipe Syntax/Rules
+  <a href="#recipe-types" title="Recipe Types" class="md-nav__link">
+    Recipe Types
   </a>
   
     <nav class="md-nav">
@@ -496,7 +496,48 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#plot-recipes" title="Plot Recipes" class="md-nav__link">
+    Plot Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#series-recipes" title="Series Recipes" class="md-nav__link">
+    Series Recipes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recipe-syntaxrules" title="Recipe Syntax/Rules" class="md-nav__link">
+    Recipe Syntax/Rules
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-recipes_1" title="User Recipes" class="md-nav__link">
+    User Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-recipes_1" title="Type Recipes" class="md-nav__link">
+    Type Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#series-recipes_1" title="Series Recipes" class="md-nav__link">
     Series Recipes
   </a>
   
@@ -676,8 +717,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recipe-syntaxrules" title="Recipe Syntax/Rules" class="md-nav__link">
-    Recipe Syntax/Rules
+  <a href="#recipe-types" title="Recipe Types" class="md-nav__link">
+    Recipe Types
   </a>
   
     <nav class="md-nav">
@@ -698,7 +739,48 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#plot-recipes" title="Plot Recipes" class="md-nav__link">
+    Plot Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#series-recipes" title="Series Recipes" class="md-nav__link">
+    Series Recipes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recipe-syntaxrules" title="Recipe Syntax/Rules" class="md-nav__link">
+    Recipe Syntax/Rules
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-recipes_1" title="User Recipes" class="md-nav__link">
+    User Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-recipes_1" title="Type Recipes" class="md-nav__link">
+    Type Recipes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#series-recipes_1" title="Series Recipes" class="md-nav__link">
     Series Recipes
   </a>
   
@@ -731,6 +813,8 @@
                 <p><a id='Advanced-Recipes-1'></a></p>
 <h1 id="advanced-recipes">Advanced Recipes</h1>
 <p>Like other tools in Plots, recipes are relatively simple, but extremely powerful.  A recipe is created by invoking the <code>@recipe</code> macro, which is defined in the lightweight package <a href="https://github.com/JuliaPlots/RecipesBase.jl">RecipesBase</a>.  There are many examples of recipes both within Plots and in many external packages, including <a href="https://github.com/JuliaPlots/PlotRecipes.jl">PlotRecipes</a>.</p>
+<p><a id='Recipe-Types-1'></a></p>
+<h2 id="recipe-types">Recipe Types</h2>
 <p>There are four main types of recipes in Plots (listed in the order they are processed):</p>
 <ul>
 <li>User Recipes</li>
@@ -740,39 +824,49 @@
 </ul>
 <p><strong>The recipe type is determined completely by the dispatch signature.</strong>  Each recipe type is called from a different part of the <a href="http://juliaplots.github.io/pipeline/">plotting pipeline</a>, so you will choose a type of recipe to match how much processing you want completed before your recipe is applied.</p>
 <p>These are the dispatch signatures for each type (note that most of these can accept positional or keyword args, denoted by <code>...</code>):</p>
-<ul>
-<li>
-<p>User Recipes: <code>@recipe function f(custom_arg_1::T, custom_arg_2::S, ...; ...) end</code></p>
+<p><a id='User-Recipes-1'></a></p>
+<h3 id="user-recipes">User Recipes</h3>
+<div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="n">custom_arg_1</span><span class="o">::</span><span class="n">T</span><span class="p">,</span> <span class="n">custom_arg_2</span><span class="o">::</span><span class="n">S</span><span class="p">,</span> <span class="o">...</span><span class="p">;</span> <span class="o">...</span><span class="p">)</span> <span class="k">end</span>
+</pre></div>
+
+
 <ul>
 <li>Process a unique set of types early in the pipeline.  Good for user-defined types or special combinations of Base types.</li>
 <li>The <code>@userplot</code> macro is a nice convenience which both defines a new type (to ensure correct dispatch) and exports shorthands.</li>
 <li>See <code>graphplot</code> for an example.</li>
-<li>
-<p>Type Recipes: <code>@recipe function f(::Type{T}, val::T) where{T} end</code></p>
-</li>
-<li>
-<p>For user-defined types which wrap or have a one-to-one mapping to something supported by Plots, simply define a conversion method.</p>
-</li>
+</ul>
+<p><a id='Type-Recipes-1'></a></p>
+<h3 id="type-recipes">Type Recipes</h3>
+<div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="o">::</span><span class="kt">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="n">val</span><span class="o">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span><span class="p">{</span><span class="n">T</span><span class="p">}</span> <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>For user-defined types which wrap or have a one-to-one mapping to something supported by Plots, simply define a conversion method.</li>
 <li>Note: this is effectively saying "when you see type T, replace it with ..."</li>
 <li>See <code>SymPy</code> for an example.</li>
-<li>
-<p>Plot Recipes: <code>@recipe function f(::Type{Val{:myplotrecipename}}, plt::AbstractPlot; ...) end</code></p>
-</li>
-<li>
-<p>These are called after input data has been processed, but <strong>before the plot is created</strong>.</p>
-</li>
+</ul>
+<p><a id='Plot-Recipes-1'></a></p>
+<h3 id="plot-recipes">Plot Recipes</h3>
+<div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="o">::</span><span class="kt">Type</span><span class="p">{</span><span class="kt">Val</span><span class="p">{</span><span class="o">:</span><span class="n">myplotrecipename</span><span class="p">}},</span> <span class="n">plt</span><span class="o">::</span><span class="n">AbstractPlot</span><span class="p">;</span> <span class="o">...</span><span class="p">)</span> <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>These are called after input data has been processed, but <strong>before the plot is created</strong>.</li>
 <li>Build layouts, add subplots, and other plot-wide attributes</li>
 <li>See <code>marginalhist</code> for an example.</li>
-<li>
-<p>Series Recipes: <code>@recipe function f(::Type{Val{:myseriesrecipename}}, x, y, z; ...) end</code></p>
-</li>
-<li>
-<p>These are the last calls to happen.  Each backend will support a short list of series types (<code>path</code>, <code>shape</code>, <code>histogram</code>, etc).  If a series type is natively supported, processing is passed (delegated) to the backend.  If a series type is <strong>not</strong> natively supported by the backend, we attempt to call a "series recipe".</p>
-</li>
+</ul>
+<p><a id='Series-Recipes-1'></a></p>
+<h3 id="series-recipes">Series Recipes</h3>
+<div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="o">::</span><span class="kt">Type</span><span class="p">{</span><span class="kt">Val</span><span class="p">{</span><span class="o">:</span><span class="n">myseriesrecipename</span><span class="p">}},</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span> <span class="o">...</span><span class="p">)</span> <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>These are the last calls to happen.  Each backend will support a short list of series types (<code>path</code>, <code>shape</code>, <code>histogram</code>, etc).  If a series type is natively supported, processing is passed (delegated) to the backend.  If a series type is <strong>not</strong> natively supported by the backend, we attempt to call a "series recipe".</li>
 <li>Note: If there's no series recipe defined, and the backend doesn't support it, you'll see an error like: <code>ERROR: The backend must not support the series type Val{:hi}, and there isn't a series recipe defined.</code></li>
 <li>Note: You must have the <code>x, y, z</code> included in the signature, or it won't be processed as a series type!!</li>
-</ul>
-</li>
 </ul>
 <p><a id='Recipe-Syntax/Rules-1'></a></p>
 <h2 id="recipe-syntaxrules">Recipe Syntax/Rules</h2>
@@ -846,8 +940,8 @@
 
 <p><img alt="" src="../examples/img/recipes1.png" /></p>
 <hr />
-<p><a id='User-Recipes-1'></a></p>
-<h3 id="user-recipes">User Recipes</h3>
+<p><a id='User-Recipes-2'></a></p>
+<h3 id="user-recipes_1">User Recipes</h3>
 <p>The example above is an example of a "user recipe", in which you define the full signature for dispatch.  User recipes (like others) can be stacked and modular.  The following is valid:</p>
 <div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="n">f</span><span class="p">(</span><span class="n">mt</span><span class="o">::</span><span class="n">MyType</span><span class="p">,</span> <span class="n">n</span><span class="o">::</span><span class="kt">Integer</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">mt</span><span class="p">,</span> <span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 <span class="nd">@recipe</span> <span class="n">f</span><span class="p">(</span><span class="n">mt</span><span class="o">::</span><span class="n">MyType</span><span class="p">,</span> <span class="n">v</span><span class="o">::</span><span class="kt">AbstractVector</span><span class="p">)</span> <span class="o">=</span> <span class="n">hist</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -856,8 +950,8 @@
 
 <p>Here a call to <code>plot(MyType())</code> will apply these recipes in order; first mapping <code>mt</code> to <code>(mt, rand(10))</code> and then subsequently mapping to <code>hist(rand(10))</code>.</p>
 <hr />
-<p><a id='Type-Recipes-1'></a></p>
-<h3 id="type-recipes">Type Recipes</h3>
+<p><a id='Type-Recipes-2'></a></p>
+<h3 id="type-recipes_1">Type Recipes</h3>
 <p>For some custom data types, they are essentially light wrappers around built-in containers.  For example you may have a type:</p>
 <div class="code"><pre><span></span><span class="k">type</span> <span class="n">MyWrapper</span>
     <span class="n">v</span><span class="o">::</span><span class="kt">Vector</span>
@@ -872,8 +966,8 @@
 
 <p>This signature is called on each input when dispatch did not find a suitable recipe for the full <code>args...</code>.  So <code>plot(rand(10), MyWrapper(rand(10)))</code> will "just work".</p>
 <hr />
-<p><a id='Series-Recipes-1'></a></p>
-<h3 id="series-recipes">Series Recipes</h3>
+<p><a id='Series-Recipes-2'></a></p>
+<h3 id="series-recipes_1">Series Recipes</h3>
 <p>This is where the magic happens.  You can create your own custom visualizations for arbitrary data.  Quickly define violin plots, error bars, and even standard types like histograms and step plots.  A histogram is a bar plot:</p>
 <div class="code"><pre><span></span><span class="nd">@recipe</span> <span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="o">::</span><span class="kt">Type</span><span class="p">{</span><span class="kt">Val</span><span class="p">{</span><span class="o">:</span><span class="n">histogram</span><span class="p">}},</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
     <span class="n">edges</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">my_hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">plotattributes</span><span class="p">[</span><span class="o">:</span><span class="n">bins</span><span class="p">],</span>
