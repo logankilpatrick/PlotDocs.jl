@@ -795,8 +795,8 @@
 <p>This example plots the four series with different labels, marker shapes, and marker colors by combining row and column vectors to decorate the data.  The result is: <img alt="applesoranges" src="../examples/img/applesoranges.png" /></p>
 <p><a id='Unconnected-Data-within-same-groups-1'></a></p>
 <h2 id="unconnected-data-within-same-groups">Unconnected Data within same groups</h2>
-<p>As shown in the examples, you can plot a single polygon by using a single call to <code>plot</code> using the <code>:path</code> line type. You can use several calls to <code>plot</code> to draw several polygons</p>
-<p>Now, let's say you're plotting <code>n</code> polygons grouped into <code>g</code> groups, with <code>n</code> &lt; <code>g</code>. While you can use <code>plot</code> to draw separate polygons with each call, you cannot group two separate plots back into a single group. You'll end up with <code>n</code> groups in the legend, rather than <code>g</code> groups.</p>
+<p>As shown in the examples, you can plot a single polygon by using a single call to <code>plot</code> using the <code>:path</code> line type. You can use several calls to <code>plot</code> to draw several polygons.</p>
+<p>Now, let's say you're plotting <code>n</code> polygons grouped into <code>g</code> groups, with <code>n</code> &gt; <code>g</code>. While you can use <code>plot</code> to draw separate polygons with each call, you cannot group two separate plots back into a single group. You'll end up with <code>n</code> groups in the legend, rather than <code>g</code> groups.</p>
 <p>To adress this, you can use <code>NaN</code> as a path separator. A call to <code>plot</code> would then draw one path with disjoints The following code draws <code>n=4</code> rectangles in <code>g=2</code> groups.</p>
 <div class="code"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">;</span> <span class="n">plotly</span><span class="p">()</span>
 
