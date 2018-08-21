@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
       
     
@@ -197,11 +197,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="Plots" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
-    </span>
+    </a>
     Plots
   </label>
   
@@ -1131,7 +1131,7 @@
             <span class="n">m</span> <span class="kp">in</span> <span class="n">Plots</span><span class="o">.</span><span class="n">supported_markers</span><span class="p">()</span>
         <span class="k">end</span><span class="p">),</span><span class="n">Plots</span><span class="o">.</span><span class="n">_shape_keys</span><span class="p">))</span><span class="o">&#39;</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">markers</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">repmat</span><span class="p">((</span><span class="n">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="o">:</span><span class="n">auto</span><span class="p">),</span><span class="n">lab</span><span class="o">=</span><span class="n">map</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">markers</span><span class="p">),</span><span class="n">bg</span><span class="o">=:</span><span class="n">linen</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
@@ -1175,7 +1175,7 @@
 <p><img alt="" src="../img/pyplot/pyplot_example_17.png" /></p>
 <p><a id='-2'></a></p>
 <h3 id="_2"></h3>
-<div class="code"><pre><span></span><span class="n">srand</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<div class="code"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">Plots</span><span class="o">.</span><span class="n">fakedata</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
@@ -1203,7 +1203,7 @@
 <span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">annotations</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">text</span><span class="p">(</span><span class="s">&quot;this is #3&quot;</span><span class="p">,</span><span class="o">:</span><span class="n">left</span><span class="p">)),</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
 <span class="n">annotate!</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">text</span><span class="p">(</span><span class="s">&quot;this is #5&quot;</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="o">:</span><span class="n">red</span><span class="p">,</span><span class="o">:</span><span class="n">center</span><span class="p">)),</span>
           <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span><span class="n">text</span><span class="p">(</span><span class="s">&quot;this is #10&quot;</span><span class="p">,</span><span class="o">:</span><span class="n">right</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s">&quot;courier&quot;</span><span class="p">))])</span>
-<span class="n">scatter!</span><span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="o">:</span><span class="n">orange</span><span class="p">),</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="o">:</span><span class="n">orange</span><span class="p">),</span>
          <span class="n">series_annotations</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;series&quot;</span><span class="p">,</span><span class="s">&quot;annotations&quot;</span><span class="p">,</span><span class="s">&quot;map&quot;</span><span class="p">,</span><span class="s">&quot;to&quot;</span><span class="p">,</span><span class="s">&quot;series&quot;</span><span class="p">,</span>
                              <span class="n">text</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="o">:</span><span class="n">green</span><span class="p">)])</span>
 </pre></div>
@@ -1254,7 +1254,7 @@
 <p><a id='D-1'></a></p>
 <h3 id="3d">3D</h3>
 <div class="code"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="nb">π</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">8</span><span class="nb">π</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">.*</span> <span class="n">map</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span><span class="n">ts</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="n">ts</span><span class="p">)</span> <span class="o">.*</span> <span class="n">map</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span><span class="n">ts</span><span class="p">)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
@@ -1276,7 +1276,7 @@
 <p><img alt="" src="../img/pyplot/pyplot_example_26.png" /></p>
 <p><a id='Polar-Plots-1'></a></p>
 <h3 id="polar-plots">Polar Plots</h3>
-<div class="code"><pre><span></span><span class="n">Θ</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.5</span><span class="nb">π</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="code"><pre><span></span><span class="n">Θ</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.5</span><span class="nb">π</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="n">Θ</span><span class="p">))</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">Θ</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">proj</span><span class="o">=:</span><span class="n">polar</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -1310,7 +1310,7 @@
          <span class="n">scatter</span><span class="p">([</span><span class="n">atan</span><span class="p">,</span><span class="n">cos</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">),</span>
          <span class="n">plot</span><span class="p">(</span><span class="n">log</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="nb">π</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">),</span><span class="n">layout</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
 <span class="n">anim</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="nb">π</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">10</span><span class="nb">π</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">plot</span><span class="p">(</span><span class="n">push!</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="kt">Float64</span><span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">atan</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)]))</span>
     <span class="n">frame</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
 <span class="k">end</span>
@@ -1400,7 +1400,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       

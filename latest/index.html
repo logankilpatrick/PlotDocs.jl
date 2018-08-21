@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="./assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="./assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="./assets/stylesheets/application.451f80e5.css">
       
       
     
@@ -197,11 +197,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="." title="Plots" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
-    </span>
+    </a>
     Plots
   </label>
   
@@ -725,23 +725,28 @@
 <p><a id='Simple-is-Beautiful-1'></a></p>
 <h3 id="simple-is-beautiful">Simple is Beautiful</h3>
 <p>Lorenz Attractor</p>
-<div class="code"><pre><span></span><span class="c"># initialize the attractor</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1500</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
-<span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">28.</span><span class="p">,</span> <span class="mi">8</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span>
+<div class="code"><pre><span></span><span class="c"># define the Lorenz attractor</span>
+<span class="n">mutable</span> <span class="n">struct</span> <span class="n">Lorenz</span>
+    <span class="n">dt</span><span class="p">;</span> <span class="n">σ</span><span class="p">;</span> <span class="n">ρ</span><span class="p">;</span> <span class="n">β</span><span class="p">;</span> <span class="n">x</span><span class="p">;</span> <span class="n">y</span><span class="p">;</span> <span class="n">z</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">step!</span><span class="p">(</span><span class="n">l</span><span class="o">::</span><span class="n">Lorenz</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">σ</span><span class="o">*</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">l</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>       <span class="p">;</span> <span class="n">l</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">l</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">dx</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">ρ</span> <span class="o">-</span> <span class="n">l</span><span class="o">.</span><span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="o">.</span><span class="n">y</span> <span class="p">;</span> <span class="n">l</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">l</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">dy</span>
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">l</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">l</span><span class="o">.</span><span class="n">β</span><span class="o">*</span><span class="n">l</span><span class="o">.</span><span class="n">z</span>     <span class="p">;</span> <span class="n">l</span><span class="o">.</span><span class="n">z</span> <span class="o">+=</span> <span class="n">l</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">dz</span>
+<span class="k">end</span>
+
+<span class="n">attractor</span> <span class="o">=</span> <span class="n">Lorenz</span><span class="p">((</span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">10.</span><span class="p">,</span> <span class="n">ρ</span> <span class="o">=</span> <span class="mf">28.</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mi">8</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+
 
 <span class="c"># initialize a 3D plot with 1 empty series</span>
-<span class="n">plt</span> <span class="o">=</span> <span class="n">path3d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">zlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span>
-                <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">zlab</span> <span class="o">=</span> <span class="s">&quot;z&quot;</span><span class="p">,</span>
-                <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Lorenz Attractor&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span> <span class="o">=</span> <span class="n">plot3d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">zlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Lorenz Attractor&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="c"># build an animated gif, saving every 10th frame</span>
-<span class="nd">@gif</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">σ</span><span class="o">*</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>     <span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dx</span>
-    <span class="n">dy</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">ρ</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span> <span class="p">;</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dy</span>
-    <span class="n">dz</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">β</span><span class="o">*</span><span class="n">z</span>     <span class="p">;</span> <span class="n">z</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dz</span>
-    <span class="n">push!</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="c"># build an animated gif by pushing new points to the plot, saving every 10th frame</span>
+<span class="nd">@gif</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">1500</span>
+    <span class="n">step!</span><span class="p">(</span><span class="n">attractor</span><span class="p">)</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">attractor</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">attractor</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">attractor</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 <span class="k">end</span> <span class="n">every</span> <span class="mi">10</span>
 </pre></div>
 
@@ -749,15 +754,15 @@
 <p><img alt="" src="./examples/img/lorenz.gif" /></p>
 <p>Make some waves</p>
 <div class="code"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">ProgressMeter</span>
-<span class="n">pyplot</span><span class="p">(</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="p">(</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span> <span class="c">#change to the pyplot backend and define some defaults</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">zs</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="c"># create a progress bar for tracking the animation generation</span>
 <span class="n">prog</span> <span class="o">=</span> <span class="n">Progress</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nd">@gif</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="nb">π</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nd">@gif</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2</span><span class="nb">π</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">10</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="c"># create a plot with 3 subplots and a custom layout</span>
@@ -765,16 +770,16 @@
     <span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">st</span> <span class="o">=</span> <span class="p">[</span><span class="o">:</span><span class="n">surface</span><span class="p">,</span> <span class="o">:</span><span class="n">contourf</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
 
     <span class="c"># induce a slight oscillating camera angle sweep, in degrees (azimuth, altitude)</span>
-    <span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">camera</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">camera</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">40</span><span class="p">))</span>
 
     <span class="c"># add a tracking line</span>
     <span class="n">fixed_x</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">fixed_x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fixed_x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fixed_x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="p">(</span><span class="o">:</span><span class="n">black</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">))</span>
     <span class="n">vline!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">line</span> <span class="o">=</span> <span class="p">(</span><span class="o">:</span><span class="n">black</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
     <span class="c"># add to and show the tracked values over time</span>
-    <span class="n">zs</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">z</span><span class="o">&#39;</span><span class="p">)</span>
+    <span class="kd">global</span> <span class="n">zs</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">z</span><span class="o">&#39;</span><span class="p">)</span>
     <span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">zs</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">cgrad</span><span class="p">(</span><span class="o">:</span><span class="n">blues</span><span class="p">)</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span>
 
     <span class="c"># increment the progress bar</span>
@@ -868,7 +873,7 @@
       
     </div>
     
-      <script src="./assets/javascripts/application.a59e2a89.js"></script>
+      <script src="./assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"."}})</script>
       
