@@ -21,356 +21,6 @@
             "title": "Simple is Beautiful"
         }, 
         {
-            "location": "/learning/", 
-            "text": "Tutorials\n\n\n\n\nStart with the tutorial\n\n\nSection from Chris Rackauckas' awesome earlier tutorial\n\n\nMachine Learning and Visualization in Julia\n\n\nQuant Econ tutorial\n\n\nPlotting section of a Julia wiki\n\n\n\n\n\n\nDemos, Examples and Notebooks\n\n\n\n\nVisualizing Graphs in Julia using Plots and PlotRecipes\n\n\nExamplePlots\n\n\nSome notebooks\n\n\n\n\n\n\nVideo tutorials\n\n\n\n\nPlots with Plots - JuliaCon 2016\n\n\n\n\n\n\n\nEcosystem and Pipeline\n\n\nhttp://www.breloff.com/plots-video/\n\n\n\n\n\n\n\nPlots in the wild\n\n\nTODO (See the \necosystem\n)", 
-            "title": "Learning"
-        }, 
-        {
-            "location": "/learning/#tutorials", 
-            "text": "Start with the tutorial  Section from Chris Rackauckas' awesome earlier tutorial  Machine Learning and Visualization in Julia  Quant Econ tutorial  Plotting section of a Julia wiki", 
-            "title": "Tutorials"
-        }, 
-        {
-            "location": "/learning/#demos-examples-and-notebooks", 
-            "text": "Visualizing Graphs in Julia using Plots and PlotRecipes  ExamplePlots  Some notebooks", 
-            "title": "Demos, Examples and Notebooks"
-        }, 
-        {
-            "location": "/learning/#video-tutorials", 
-            "text": "", 
-            "title": "Video tutorials"
-        }, 
-        {
-            "location": "/learning/#plots-with-plots-juliacon-2016", 
-            "text": "", 
-            "title": "Plots with Plots - JuliaCon 2016"
-        }, 
-        {
-            "location": "/learning/#ecosystem-and-pipeline", 
-            "text": "http://www.breloff.com/plots-video/", 
-            "title": "Ecosystem and Pipeline"
-        }, 
-        {
-            "location": "/learning/#plots-in-the-wild", 
-            "text": "TODO (See the  ecosystem )", 
-            "title": "Plots in the wild"
-        }, 
-        {
-            "location": "/contributing/", 
-            "text": "This is a guide to contributing to Plots and the surrounding ecosystem.  Plots is a complex and far-reaching suite of software components, and as such will be most effective when the community contributes their own expertise, knowledge, perspective, and effort.  The document is roughly broken up into the following categories, and after reading this introduction you should feel comfortable skipping to the section(s) that interest you the most:\n\n\n\n\nThe JuliaPlots Organization\n: Packages and dependencies\n\n\nChoosing a Project\n: Fix bugs, add features, create recipes\n\n\nKey Design Principles\n: Design goals and considerations\n\n\nCode Organization\n: Where to look when implementing new features\n\n\nGit-fu (or... the mechanics of contributing)\n: Git (how to commit/push), Github (how to submit a PR), Testing (VisualRegressionTests, Travis)\n\n\n\n\nWhen in doubt, use this handy dandy logic designed by a \nlegendary open source guru\n...\n\n\n\n\n\n\n\n\nThe JuliaPlots Organization\n\n\nJuliaPlots\n is the home for all things Plots.  It was founded by \nTom Breloff\n, and extended through many contributions from \nmembers\n and others.  The first step in contributing will be to understand which package(s) are appropriate destinations for your code.\n\n\n\n\nPlots\n\n\nThis is the core package for:\n\n\n\n\nDefinitions of \nplot\n/\nplot!\n\n\nThe \ncore processing pipeline\n\n\nBase \nrecipes\n for \npath\n, \nscatter\n, \nbar\n, and many others\n\n\nGeneric \noutput\n methods\n\n\nGeneric \nlayout\n methods\n\n\nGeneric \nanimation\n methods\n\n\nGeneric types: Plot, Subplot, Axis, Series, ...\n\n\nConveniences: \ngetindex\n/\nsetindex\n, \npush!\n/\nappend!\n, \nunzip\n, \ncycle\n, ...\n\n\n\n\nThis package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.\n\n\n\n\nBackends\n\n\nIn Julia versions v0.5 and earlier, backend code (such as code linking Plots with GR) lived in the \nPlots/src/backends\n directory.  As such, backend code should be contributed to core Plots.\n\n\nStarting with v0.6, the backend code will live in separate repos, and loaded on demand.  For example, the GR backend is being developed at \nPlotsGR\n.  Users targeting v0.6 and later should contribute to the respective backend package \"Plots[backend].jl\".\n\n\nNote: As of 2/22/17, the \nreorg\n branch of Plots is needed for compatibility with the new backend repos.  This will be merged into the master branch sometime after the release of v0.6.\n\n\nThis redesign will help with improved support for precompilation, and a cleaner separation of \"generic plotting\" development and \"backend-specific\" development.\n\n\n\n\nPlotDocs\n\n\nPlotDocs is the home of this documentation.  The documentation is built using the \"material\" theme in \"mkdocs\".  For those contributing documentation (to the \ndocs\n directory of PlotDocs), it must be subsequently built and deployed using the following instructions:\n\n\n# Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page\n\n# To build, run from inside the PlotDocs directory:\n#     mkdocs build --clean\n# (optional) Make the githubio remote point to JuliaPlots/juliaplots.github.io:\n#     git remote add githubio git@github.com:JuliaPlots/juliaplots.github.io.git\n# Add files, commit, then push:\n#     git push origin master\n# Push just the site directory to the master branch of githubio\n#     git subtree push --prefix site githubio master\n\n\n\n\n\n\n\nRecipesBase\n\n\nSeldom updated, but essential.  This is the package that you would depend on to create third-party recipes.  It contains the bare minimum to define new recipes.\n\n\n\n\nPlotUtils\n\n\nComponents that could be used for other (non-Plots) packages.  Anything that is sufficiently generic and useful could be contributed here.\n\n\n\n\nColor (conversions, construction, conveniences)\n\n\nColor gradients/maps\n\n\nTick computation\n\n\n\n\n\n\nPlotThemes\n\n\nVisual themes (i.e. attribute defaults) such as \"dark\", \"orange\", etc.\n\n\n\n\nStatPlots\n\n\nAn extension of Plots: Statistical plotting and tabular data.  Complex histograms and densities, correlation plots, and support for DataFrames.  Anything related to stats or special handling for table-like data should live here.\n\n\n\n\nPlotRecipes\n\n\nAn extension of StatPlots: Graphs, maps, and more.  If it's not a \"base recipe\", and also not clearly \"statistical\" in nature, then this package might be a good home.\n\n\n\n\nMLPlots\n\n\nAn extension of PlotRecipes, geared toward Machine Learning applications: neural nets, spike trains, ROC curves, and more.\n\n\n\n\nGGPlots\n\n\nA prototype API/interface for \"Grammar of Graphics\" style plotting.  This likely wouldn't add actual functionality, but would give users coming from R/ggplot2 a simple way to avoid Gadfly.  I (Tom) wrote the prototype to show how easy it is, but since I dislike GoG-style, I never finished it.  Completing this package would be a great self-contained project for interested parties.\n\n\n\n\n\n\nChoosing a Project\n\n\nFor people new to Plots, the first step should be to read (and reread) the documentation.  Code up some examples, play with the attributes, and try out multiple backends.  It's really hard to contribute to a project that you don't know how to use.\n\n\n\n\nBeginner Project Ideas\n\n\n\n\nCreate a new recipe\n: Preferably something you care about.  Maybe you want custom overlays of heatmaps and scatters?  Maybe you have an input format that isn't currently supported?  Make a recipe for it so you can just \nplot(thing)\n.\n\n\nFix bugs\n: There are many \"bugs\" which are specific to one backend, or incorrectly implement features that are infrequently used.  Some ideas can be found in the \nissues marked easy\n.\n\n\nAdd recipes to external packages\n: By depending on RecipesBase, a package can define a recipe for their custom types.  Submit a PR to a package you care about that adds a recipe for that package.  For example, see \nthis PR to add OHLC plots for TimeSeries.jl\n.\n\n\n\n\n\n\nIntermediate Project Ideas\n\n\n\n\nImprove your favorite backend\n: There are many missing features and other improvements that can be made to individual backends.  Most issues specific to a backend have a \nspecial tag\n.\n\n\nHelp with documentation\n: This could come in the form of improved descriptions, additional examples, or full tutorials.  Please contribute improvements to \nPlotDocs\n.\n\n\nHelp with the v0.6 reorganization\n: The \nreorg\n requires the annoying effort of creating new repos (PlotsPyPlot, PlotsPlotlyJS, etc) that hold the backend code.  I consider this intermediate because you need to know a little about Plots and git, but it's fairly straightforward to follow the model of PlotsGR.\n\n\nExpand StatPlots functionality\n:  qqplot, DataStreams, or anything else you can think of.\n\n\n\n\n\n\nAdvanced Project Ideas\n\n\n\n\nColorBar redesign\n: Colorbars \nneed serious love\n... this would likely require a new Colorbar type that links with the appropriate Series object(s) and is independent during subplot layout.  We want to allow many series (possibly from multiple subplots) to use the same clims and to share a colorbar, or have multiple colorbars that can be flexibly positioned.\n\n\nPlotSpec redesign\n: This \nlong standing redesign proposal\n could allow generic serialization/deserialization of Plot data and attributes, as well as some improvements/optimizations when mutating plots.  For example, we could lazily compute attribute values, and intelligently flag them as \"dirty\" when they change, allowing backends to skip much of the wasted processing and unnecessary rebuilding that currently occurs.\n\n\nImprove graph recipes\n: Lots to do here: clean up visuals, improve edge drawing, implement \nlayout algorithms\n, and much more.\n\n\n\n\n\n\n\n\nKey Design Principles\n\n\nFlexible and generic... these are the core principles underlying Plots development, and also tend to cause confusion when users laser-focus on their specific use case.\n\n\nI (Tom) have painstakingly designed the core logic to support nearly any use case that exists or may exist.  I don't pretend to know how you want to use Plots, or what type of data you might pass in, or what sort of recipe you may want to apply.  As such, I try to avoid unnecessary restriction of types, or forced conversions, or many other pitfalls of limited visualization frameworks.  The result is a highly modular framework which is limited by your imagination.\n\n\nWhen contributing new features to Plots (or the surrounding ecosystem), you should strive for this mentality as well.  New features should be left as generic as possible, while avoiding obvious feature clash.\n\n\nAs an example, you may want a new recipe that shows a histogram when passed Float64 numbers, but shows counts of every unique value for strings.  So you make a recipe that works perfectly for your purpose:\n\n\nusing\n \nPlots\n,\n \nStatsBase\n\n\ngr\n(\nsize\n=\n(\n300\n,\n300\n),\n \nleg\n=\nfalse\n)\n\n\n\n@userplot\n \nMyCount\n\n\n@recipe\n \nfunction\n \nf\n(\nmc\n::\nMyCount\n)\n\n    \n# get the array from the args field\n\n    \narr\n \n=\n \nmc\n.\nargs\n[\n1\n]\n\n\n    \nT\n \n=\n \ntypeof\n(\narr\n)\n\n    \nif\n \nT\n.\nparameters\n[\n1\n]\n \n==\n \nFloat64\n\n        \nseriestype\n \n:=\n \n:\nhistogram\n\n        \narr\n\n    \nelse\n\n        \nseriestype\n \n:=\n \n:\nbar\n\n        \ncm\n \n=\n \ncountmap\n(\narr\n)\n\n        \nx\n \n=\n \nsort!\n(\ncollect\n(\nkeys\n(\ncm\n)))\n\n        \ny\n \n=\n \n[\ncm\n[\nxi\n]\n \nfor\n \nxi\n=\nx\n]\n\n        \nx\n,\n \ny\n\n    \nend\n\n\nend\n\n\n\n\n\n\nThe recipe defined above is a \"user recipe\", which builds a histogram for arrays of Float64, and otherwise shows a \"countmap\" of sorted unique values and their observed counts.  You only care about Float64 and String, and so you're results are fine:\n\n\nmycount\n(\nrand\n(\n500\n))\n\n\n\n\n\n\n\n\nmycount\n(\nrand\n([\nA\n,\nB\n,\nC\n],\n100\n))\n\n\n\n\n\n\n\n\nBut you didn't consider the person that, in the future, might want to pass integers to this recipe:\n\n\nmycount\n(\nrand\n(\n1\n:\n500\n,\n \n500\n))\n\n\n\n\n\n\n\n\nThis user expected integers to be treated as numbers and output a histogram, but instead they were treated like strings.  A simple solution would have been to replace \nif T.parameters[1] == Float64\n with \nif T.parameters[1] \n: Number\n.  However, should we even depend on \nT\n having it's first parameter be the element type? (No)  So even better would be \nif eltype(arr) \n: Number\n, which now allows any container with any numeric type to trigger the \"histogram\" logic.\n\n\nThis simple example outlines a common theme when developing Plots (or really any other Julia package).  Try to create the most generic implementation you can think of while maintaining correctness.  You don't know what crazy types someone else will use to try to access your functionality.\n\n\n\n\n\n\nCode Organization\n\n\nGenerally speaking, similar functionality is kept within the same file.  Within the \nsrc\n directory, much of the files should be self explanatory (for example, you'll find animation methods/macros in the \nanimation.jl\n file), but some could use a summary of contents:\n\n\n\n\nPlots.jl\n: imports, exports, shorthands, and initialization\n\n\nargs.jl\n: defaults, aliases, and attribute processing\n\n\ncomponents.jl\n: shapes, fonts, and other assorted goodies\n\n\npipeline.jl\n: code which builds the plots and subplots through recursive application of recipes\n\n\nrecipes.jl\n: primarily core series recipes\n\n\nseries.jl\n: core input data handling and processing\n\n\nutils.jl\n: lots of functionality that didn't have a home... \ngetindex\n/\nsetindex!\n for \nPlot\n/\nSubplot\n/\nAxis\n/\nSeries\n, \npush!\n/\nappend!\n for adding data to a series, \ncycle\n/\nunzip\n and similar utility functions, \nSegments\n/\nSegmentsIterator\n, etc.\n\n\n\n\nThese files should probably be reorganized, but until then...\n\n\n\n\nCreating new backends\n\n\nModel new backends on \nPlotsGR\n.  Implement the callbacks that are appropriate, especially \n_display\n and \n_show\n for GUI and image output respectively.\n\n\n\n\nStyle/Design Guidelines\n\n\n\n\nMake every effort to minimize external dependencies and exports.  Requiring new dependencies is the most likely way to make your PR \"unmergeable\".\n\n\nBe careful adding method signatures on existing methods with Base types (Array, etc) as you may override key functionality.  This is especially true with recipes.  Consider wrapping inputs in a new type (like in \"user recipes\").\n\n\nTerse code is ok, as is verbose code.  What's important is understanding and context.  Will someone reading your code know what you mean?  If not, consider writing comments to describe your reason for the design, or describe the hack you just implemented in clear prose.  Sometimes \nit's ok that your comments are longer than your code\n.\n\n\nPick your project for yourself, but write code for others.  It should be generic and useful beyond your needs, and you should \nnever break functionality\n because you can't figure out how to implement something well.  Spend more time on it... there's always a better way.\n\n\n\n\n\n\n\n\nGit-fu (or... the mechanics of contributing)\n\n\nMany people have trouble with Git.  More have trouble with Github.  I think much of the confusion happens when you run commands without understanding what they do.  We're all guilty of it, but recovering usually means \"starting over\".  In this section, I'll try to keep a simple, practical approach to making PRs.  It's worked well for me, though YMMV.\n\n\n\n\nGuidelines\n\n\nHere are some guidelines for the development workflow (Note: Even if you've made 20 PRs to Plots in the past, please read this as it may be different than past guidelines):\n\n\n\n\nCommit to a branch that belongs to you.\n  Typically that means you should give your branches names that are unique to you, and that might include information on the feature you're developing.  For example, I might choose to \ngit checkout -b tb-fonts\n when starting work on fonts.\n\n\nOpen a PR against master.\n  \nmaster\n is the \"bleeding edge\".  (Note: I used to recommend PRing to \ndev\n)\n\n\nOnly merge others changes when absolutely necessary.\n You should prefer to use \ngit rebase origin/master\n instead of \ngit merge origin/master\n.  A rebase replays your recent commits on top of the most recent \nmaster\n, avoiding complicated and messy merge commits and generally avoiding confusion.  If you follow the first rule, then you likely won't get yourself in trouble.  Rebase horror stories generally result when many people are working on the same branch.  I find \nthis resource\n is great for understanding the important parts of \ngit rebase\n.\n\n\n\n\n\n\n\n\nDevelopment Workflow\n\n\nMy suggestions for a smooth development workflow:\n\n\n\n\nFork the repo\n\n\nNavigate to the repo site (https://github.com/JuliaPlots/Plots.jl) and click the \"Fork\" button.  You might get a choice of which account or organization to place the fork.  I'll assume going forward that you forked to Github username \nuser123\n.\n\n\n\n\nSet up the git remote\n\n\nNavigate to the local repo.  Note: I'm assuming that you do development in your Julia directory, and using Mac/Linux.  Adjust as needed.\n\n\ncd ~/.julia/v0.5/Plots\ngit remote add forked git@github.com:user123/Plots.jl.git\n\n\n\n\n\nAfter running these commands, \ngit remote -v\n should show two remotes: \norigin\n (the main repo) and \nforked\n (your fork).  A remote is simply a reference/pointer to the github site hosting the repo, and a fork is simply any other git repo with a special link to the originating repo.\n\n\n\n\nCreate a new branch\n\n\nIf you're just starting work on a new feature:\n\n\ngit fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit checkout -b user123-myfeature\ngit push -u forked user123-myfeature\n\n\n\n\n\nThe first three lines are meant to ensure you start from the main repo's master branch.  The \n--ff-only\n flag ensures you will only \"fast forward\" to newer commits, and avoids creating a new merge commit when you didn't mean to.  The \ngit checkout\n line both creates a new branch (the \n-b\n) pointing to the current commit and makes that branch current.  The \ngit push\n line adds this branch to your Github fork, and sets up the local branch to \"track\" (\n-u\n) the remote branch for subsequent \ngit push\n and \ngit pull\n calls.\n\n\n\n\nor... Reuse an old branch\n\n\nIf you have an ongoing development branch (say, \nuser123-dev\n) which you'd prefer to use (and which has previously been merged into master!) then you can get that up to date with:\n\n\ngit fetch origin\ngit checkout user123-dev\ngit merge --ff-only origin/master\ngit push forked user123-dev\n\n\n\n\n\nWe update our local copy of origin, checkout the dev branch, then attempt to \"fast-forward\" to the current master.  If successful, we push the branch back to our forked repo.\n\n\n\n\nWrite code and commit\n\n\nAfter powering up your favorite editor (maybe \nJuno\n?) and making some code changes to the repo, you'll want to \"commit\" or save a snapshot of all the changes you made.  After committing, you can \"push\" those changes to your forked repo on Github:\n\n\ngit add src/my_new_file.jl\ngit commit -am \nmy commit message\n\ngit push forked user123-dev\n\n\n\n\n\nThe first line is optional, and is used when adding new files to the repo.  The \n-a\n means \"commit all my changes\", and the \n-m\n lets you write a note about the commit (you should always do this, and hopefully make it descriptive).\n\n\n\n\nSubmit a PR\n\n\nYou're almost there!  Browse to your fork (https://github.com/user123/Plots.jl).  Most likely there will be a section just above the code that asks if you'd like to create a PR from the \nuser123-dev\n branch.  If not, you can click the \"New pull request\" button.\n\n\nMake sure the \"base\" branch is JuliaPlots \nmaster\n and the \"compare\" branch is \nuser123-dev\n.  Add an informative title and description, and link to relevant issues or discussions, then click \"Create pull request\".  You may get some questions about it, and possibly suggestions of how to fix it to be \"merge-ready\".  Then hopefully it gets merged... thanks for the contribution!!\n\n\n\n\nCleanup\n\n\nAfter all of this, you will likely want to go back to using \nmaster\n (or possibly using a tagged release, once your feature is tagged).  To clean up:\n\n\ngit fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit branch -d user123-dev\n\n\n\n\n\nThis catches your local master branch up to the remote master branch, then deletes the dev branch.  If you want to return to tagged releases, run \nPkg.free(\"Plots\")\n from the Julia REPL.\n\n\n\n\n\n\nTags\n\n\nNew tags should represent \"stable releases\"... those that you are happy to distribute to end-users.  Effort should be made to ensure tests pass before creating a new tag, and ideally new tests would be added which test your new functionality.  This is, of course, a much trickier problem for visualization libraries as compared to other software.  See the \ntesting section\n below.\n\n\nOnly JuliaPlots members may create a new tag.  To create a new tag, we'll create a new release on Github and use \nattobot\n to generate the PR to METADATA.  Create a new release at https://github.com/JuliaPlots/Plots.jl/releases/new (of course replacing the repo name with the package you're tagging).\n\n\nThe version number (vMAJOR.MINOR.PATCH) should be incremented using \nsemver\n, which generally means that breaking changes should increment the major number, backwards compatible changes should increment the minor number, and bug fixes should increment the patch number.  For \"v0.x.y\" versions, this requirement is relaxed.  The minor version can be incremented for breaking changes.\n\n\n\n\n\n\nTesting\n\n\n\n\nVisualRegressionTests\n\n\nTesting in Plots is done with the help of \nVisualRegressionTests\n.  Reference images are stored in \nPlotReferenceImages\n. Sometimes the reference images need to be updated (if features change, or if the underlying backend changes).  VisualRegressionTests makes it somewhat painless to update the reference images:\n\n\nFrom the Julia REPL, run \ninclude(Pkg.dir(\"Plots\",\"test\",\"runtests.jl\"))\n.  This will try to plot the tests, and then compare the results to the stored reference images.  If the test output is sufficiently different than the reference output (using Tim Holy's excellent algorithm for the comparison), then a GTK window will pop up with a side-by-side comparison.  You can choose to replace the reference image, or not, depending on whether a real error was discovered.\n\n\nAfter the reference images have been updated, navigate to PlotReferenceImages and push the changes to Github:\n\n\ncd ~/.julia/v0.5/PlotReferenceImages\ngit add Plots/*\ngit commit -am \na useful message\n\ngit push\n\n\n\n\n\nIf there are mis-matches due to bugs, \ndon't update the reference image\n.\n\n\n\n\nTravis\n\n\nOn a \ngit push\n, Travis tests will be triggered.  This runs the same tests as above, downloading and comparing to the reference images, though with a larger tolerance for differences.  When Travis errors, it may be due to timeouts, stale reference images, or a host of other reasons.  Check the \nTravis logs\n to determine the reason.  If the tests are broken because of a new commit, consider rolling back.", 
-            "title": "Contributing"
-        }, 
-        {
-            "location": "/contributing/#the-juliaplots-organization", 
-            "text": "JuliaPlots  is the home for all things Plots.  It was founded by  Tom Breloff , and extended through many contributions from  members  and others.  The first step in contributing will be to understand which package(s) are appropriate destinations for your code.", 
-            "title": "The JuliaPlots Organization"
-        }, 
-        {
-            "location": "/contributing/#plots", 
-            "text": "This is the core package for:   Definitions of  plot / plot!  The  core processing pipeline  Base  recipes  for  path ,  scatter ,  bar , and many others  Generic  output  methods  Generic  layout  methods  Generic  animation  methods  Generic types: Plot, Subplot, Axis, Series, ...  Conveniences:  getindex / setindex ,  push! / append! ,  unzip ,  cycle , ...   This package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.", 
-            "title": "Plots"
-        }, 
-        {
-            "location": "/contributing/#backends", 
-            "text": "In Julia versions v0.5 and earlier, backend code (such as code linking Plots with GR) lived in the  Plots/src/backends  directory.  As such, backend code should be contributed to core Plots.  Starting with v0.6, the backend code will live in separate repos, and loaded on demand.  For example, the GR backend is being developed at  PlotsGR .  Users targeting v0.6 and later should contribute to the respective backend package \"Plots[backend].jl\".  Note: As of 2/22/17, the  reorg  branch of Plots is needed for compatibility with the new backend repos.  This will be merged into the master branch sometime after the release of v0.6.  This redesign will help with improved support for precompilation, and a cleaner separation of \"generic plotting\" development and \"backend-specific\" development.", 
-            "title": "Backends"
-        }, 
-        {
-            "location": "/contributing/#plotdocs", 
-            "text": "PlotDocs is the home of this documentation.  The documentation is built using the \"material\" theme in \"mkdocs\".  For those contributing documentation (to the  docs  directory of PlotDocs), it must be subsequently built and deployed using the following instructions:  # Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page\n\n# To build, run from inside the PlotDocs directory:\n#     mkdocs build --clean\n# (optional) Make the githubio remote point to JuliaPlots/juliaplots.github.io:\n#     git remote add githubio git@github.com:JuliaPlots/juliaplots.github.io.git\n# Add files, commit, then push:\n#     git push origin master\n# Push just the site directory to the master branch of githubio\n#     git subtree push --prefix site githubio master", 
-            "title": "PlotDocs"
-        }, 
-        {
-            "location": "/contributing/#recipesbase", 
-            "text": "Seldom updated, but essential.  This is the package that you would depend on to create third-party recipes.  It contains the bare minimum to define new recipes.", 
-            "title": "RecipesBase"
-        }, 
-        {
-            "location": "/contributing/#plotutils", 
-            "text": "Components that could be used for other (non-Plots) packages.  Anything that is sufficiently generic and useful could be contributed here.   Color (conversions, construction, conveniences)  Color gradients/maps  Tick computation", 
-            "title": "PlotUtils"
-        }, 
-        {
-            "location": "/contributing/#plotthemes", 
-            "text": "Visual themes (i.e. attribute defaults) such as \"dark\", \"orange\", etc.", 
-            "title": "PlotThemes"
-        }, 
-        {
-            "location": "/contributing/#statplots", 
-            "text": "An extension of Plots: Statistical plotting and tabular data.  Complex histograms and densities, correlation plots, and support for DataFrames.  Anything related to stats or special handling for table-like data should live here.", 
-            "title": "StatPlots"
-        }, 
-        {
-            "location": "/contributing/#plotrecipes", 
-            "text": "An extension of StatPlots: Graphs, maps, and more.  If it's not a \"base recipe\", and also not clearly \"statistical\" in nature, then this package might be a good home.", 
-            "title": "PlotRecipes"
-        }, 
-        {
-            "location": "/contributing/#mlplots", 
-            "text": "An extension of PlotRecipes, geared toward Machine Learning applications: neural nets, spike trains, ROC curves, and more.", 
-            "title": "MLPlots"
-        }, 
-        {
-            "location": "/contributing/#ggplots", 
-            "text": "A prototype API/interface for \"Grammar of Graphics\" style plotting.  This likely wouldn't add actual functionality, but would give users coming from R/ggplot2 a simple way to avoid Gadfly.  I (Tom) wrote the prototype to show how easy it is, but since I dislike GoG-style, I never finished it.  Completing this package would be a great self-contained project for interested parties.", 
-            "title": "GGPlots"
-        }, 
-        {
-            "location": "/contributing/#choosing-a-project", 
-            "text": "For people new to Plots, the first step should be to read (and reread) the documentation.  Code up some examples, play with the attributes, and try out multiple backends.  It's really hard to contribute to a project that you don't know how to use.", 
-            "title": "Choosing a Project"
-        }, 
-        {
-            "location": "/contributing/#beginner-project-ideas", 
-            "text": "Create a new recipe : Preferably something you care about.  Maybe you want custom overlays of heatmaps and scatters?  Maybe you have an input format that isn't currently supported?  Make a recipe for it so you can just  plot(thing) .  Fix bugs : There are many \"bugs\" which are specific to one backend, or incorrectly implement features that are infrequently used.  Some ideas can be found in the  issues marked easy .  Add recipes to external packages : By depending on RecipesBase, a package can define a recipe for their custom types.  Submit a PR to a package you care about that adds a recipe for that package.  For example, see  this PR to add OHLC plots for TimeSeries.jl .", 
-            "title": "Beginner Project Ideas"
-        }, 
-        {
-            "location": "/contributing/#intermediate-project-ideas", 
-            "text": "Improve your favorite backend : There are many missing features and other improvements that can be made to individual backends.  Most issues specific to a backend have a  special tag .  Help with documentation : This could come in the form of improved descriptions, additional examples, or full tutorials.  Please contribute improvements to  PlotDocs .  Help with the v0.6 reorganization : The  reorg  requires the annoying effort of creating new repos (PlotsPyPlot, PlotsPlotlyJS, etc) that hold the backend code.  I consider this intermediate because you need to know a little about Plots and git, but it's fairly straightforward to follow the model of PlotsGR.  Expand StatPlots functionality :  qqplot, DataStreams, or anything else you can think of.", 
-            "title": "Intermediate Project Ideas"
-        }, 
-        {
-            "location": "/contributing/#advanced-project-ideas", 
-            "text": "ColorBar redesign : Colorbars  need serious love ... this would likely require a new Colorbar type that links with the appropriate Series object(s) and is independent during subplot layout.  We want to allow many series (possibly from multiple subplots) to use the same clims and to share a colorbar, or have multiple colorbars that can be flexibly positioned.  PlotSpec redesign : This  long standing redesign proposal  could allow generic serialization/deserialization of Plot data and attributes, as well as some improvements/optimizations when mutating plots.  For example, we could lazily compute attribute values, and intelligently flag them as \"dirty\" when they change, allowing backends to skip much of the wasted processing and unnecessary rebuilding that currently occurs.  Improve graph recipes : Lots to do here: clean up visuals, improve edge drawing, implement  layout algorithms , and much more.", 
-            "title": "Advanced Project Ideas"
-        }, 
-        {
-            "location": "/contributing/#key-design-principles", 
-            "text": "Flexible and generic... these are the core principles underlying Plots development, and also tend to cause confusion when users laser-focus on their specific use case.  I (Tom) have painstakingly designed the core logic to support nearly any use case that exists or may exist.  I don't pretend to know how you want to use Plots, or what type of data you might pass in, or what sort of recipe you may want to apply.  As such, I try to avoid unnecessary restriction of types, or forced conversions, or many other pitfalls of limited visualization frameworks.  The result is a highly modular framework which is limited by your imagination.  When contributing new features to Plots (or the surrounding ecosystem), you should strive for this mentality as well.  New features should be left as generic as possible, while avoiding obvious feature clash.  As an example, you may want a new recipe that shows a histogram when passed Float64 numbers, but shows counts of every unique value for strings.  So you make a recipe that works perfectly for your purpose:  using   Plots ,   StatsBase  gr ( size = ( 300 , 300 ),   leg = false )  @userplot   MyCount  @recipe   function   f ( mc :: MyCount ) \n     # get the array from the args field \n     arr   =   mc . args [ 1 ] \n\n     T   =   typeof ( arr ) \n     if   T . parameters [ 1 ]   ==   Float64 \n         seriestype   :=   : histogram \n         arr \n     else \n         seriestype   :=   : bar \n         cm   =   countmap ( arr ) \n         x   =   sort! ( collect ( keys ( cm ))) \n         y   =   [ cm [ xi ]   for   xi = x ] \n         x ,   y \n     end  end   The recipe defined above is a \"user recipe\", which builds a histogram for arrays of Float64, and otherwise shows a \"countmap\" of sorted unique values and their observed counts.  You only care about Float64 and String, and so you're results are fine:  mycount ( rand ( 500 ))    mycount ( rand ([ A , B , C ], 100 ))    But you didn't consider the person that, in the future, might want to pass integers to this recipe:  mycount ( rand ( 1 : 500 ,   500 ))    This user expected integers to be treated as numbers and output a histogram, but instead they were treated like strings.  A simple solution would have been to replace  if T.parameters[1] == Float64  with  if T.parameters[1]  : Number .  However, should we even depend on  T  having it's first parameter be the element type? (No)  So even better would be  if eltype(arr)  : Number , which now allows any container with any numeric type to trigger the \"histogram\" logic.  This simple example outlines a common theme when developing Plots (or really any other Julia package).  Try to create the most generic implementation you can think of while maintaining correctness.  You don't know what crazy types someone else will use to try to access your functionality.", 
-            "title": "Key Design Principles"
-        }, 
-        {
-            "location": "/contributing/#code-organization", 
-            "text": "Generally speaking, similar functionality is kept within the same file.  Within the  src  directory, much of the files should be self explanatory (for example, you'll find animation methods/macros in the  animation.jl  file), but some could use a summary of contents:   Plots.jl : imports, exports, shorthands, and initialization  args.jl : defaults, aliases, and attribute processing  components.jl : shapes, fonts, and other assorted goodies  pipeline.jl : code which builds the plots and subplots through recursive application of recipes  recipes.jl : primarily core series recipes  series.jl : core input data handling and processing  utils.jl : lots of functionality that didn't have a home...  getindex / setindex!  for  Plot / Subplot / Axis / Series ,  push! / append!  for adding data to a series,  cycle / unzip  and similar utility functions,  Segments / SegmentsIterator , etc.   These files should probably be reorganized, but until then...", 
-            "title": "Code Organization"
-        }, 
-        {
-            "location": "/contributing/#creating-new-backends", 
-            "text": "Model new backends on  PlotsGR .  Implement the callbacks that are appropriate, especially  _display  and  _show  for GUI and image output respectively.", 
-            "title": "Creating new backends"
-        }, 
-        {
-            "location": "/contributing/#styledesign-guidelines", 
-            "text": "Make every effort to minimize external dependencies and exports.  Requiring new dependencies is the most likely way to make your PR \"unmergeable\".  Be careful adding method signatures on existing methods with Base types (Array, etc) as you may override key functionality.  This is especially true with recipes.  Consider wrapping inputs in a new type (like in \"user recipes\").  Terse code is ok, as is verbose code.  What's important is understanding and context.  Will someone reading your code know what you mean?  If not, consider writing comments to describe your reason for the design, or describe the hack you just implemented in clear prose.  Sometimes  it's ok that your comments are longer than your code .  Pick your project for yourself, but write code for others.  It should be generic and useful beyond your needs, and you should  never break functionality  because you can't figure out how to implement something well.  Spend more time on it... there's always a better way.", 
-            "title": "Style/Design Guidelines"
-        }, 
-        {
-            "location": "/contributing/#git-fu-or-the-mechanics-of-contributing", 
-            "text": "Many people have trouble with Git.  More have trouble with Github.  I think much of the confusion happens when you run commands without understanding what they do.  We're all guilty of it, but recovering usually means \"starting over\".  In this section, I'll try to keep a simple, practical approach to making PRs.  It's worked well for me, though YMMV.", 
-            "title": "Git-fu (or... the mechanics of contributing)"
-        }, 
-        {
-            "location": "/contributing/#guidelines", 
-            "text": "Here are some guidelines for the development workflow (Note: Even if you've made 20 PRs to Plots in the past, please read this as it may be different than past guidelines):   Commit to a branch that belongs to you.   Typically that means you should give your branches names that are unique to you, and that might include information on the feature you're developing.  For example, I might choose to  git checkout -b tb-fonts  when starting work on fonts.  Open a PR against master.    master  is the \"bleeding edge\".  (Note: I used to recommend PRing to  dev )  Only merge others changes when absolutely necessary.  You should prefer to use  git rebase origin/master  instead of  git merge origin/master .  A rebase replays your recent commits on top of the most recent  master , avoiding complicated and messy merge commits and generally avoiding confusion.  If you follow the first rule, then you likely won't get yourself in trouble.  Rebase horror stories generally result when many people are working on the same branch.  I find  this resource  is great for understanding the important parts of  git rebase .", 
-            "title": "Guidelines"
-        }, 
-        {
-            "location": "/contributing/#development-workflow", 
-            "text": "My suggestions for a smooth development workflow:", 
-            "title": "Development Workflow"
-        }, 
-        {
-            "location": "/contributing/#fork-the-repo", 
-            "text": "Navigate to the repo site (https://github.com/JuliaPlots/Plots.jl) and click the \"Fork\" button.  You might get a choice of which account or organization to place the fork.  I'll assume going forward that you forked to Github username  user123 .", 
-            "title": "Fork the repo"
-        }, 
-        {
-            "location": "/contributing/#set-up-the-git-remote", 
-            "text": "Navigate to the local repo.  Note: I'm assuming that you do development in your Julia directory, and using Mac/Linux.  Adjust as needed.  cd ~/.julia/v0.5/Plots\ngit remote add forked git@github.com:user123/Plots.jl.git  After running these commands,  git remote -v  should show two remotes:  origin  (the main repo) and  forked  (your fork).  A remote is simply a reference/pointer to the github site hosting the repo, and a fork is simply any other git repo with a special link to the originating repo.", 
-            "title": "Set up the git remote"
-        }, 
-        {
-            "location": "/contributing/#create-a-new-branch", 
-            "text": "If you're just starting work on a new feature:  git fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit checkout -b user123-myfeature\ngit push -u forked user123-myfeature  The first three lines are meant to ensure you start from the main repo's master branch.  The  --ff-only  flag ensures you will only \"fast forward\" to newer commits, and avoids creating a new merge commit when you didn't mean to.  The  git checkout  line both creates a new branch (the  -b ) pointing to the current commit and makes that branch current.  The  git push  line adds this branch to your Github fork, and sets up the local branch to \"track\" ( -u ) the remote branch for subsequent  git push  and  git pull  calls.", 
-            "title": "Create a new branch"
-        }, 
-        {
-            "location": "/contributing/#or-reuse-an-old-branch", 
-            "text": "If you have an ongoing development branch (say,  user123-dev ) which you'd prefer to use (and which has previously been merged into master!) then you can get that up to date with:  git fetch origin\ngit checkout user123-dev\ngit merge --ff-only origin/master\ngit push forked user123-dev  We update our local copy of origin, checkout the dev branch, then attempt to \"fast-forward\" to the current master.  If successful, we push the branch back to our forked repo.", 
-            "title": "or... Reuse an old branch"
-        }, 
-        {
-            "location": "/contributing/#write-code-and-commit", 
-            "text": "After powering up your favorite editor (maybe  Juno ?) and making some code changes to the repo, you'll want to \"commit\" or save a snapshot of all the changes you made.  After committing, you can \"push\" those changes to your forked repo on Github:  git add src/my_new_file.jl\ngit commit -am  my commit message \ngit push forked user123-dev  The first line is optional, and is used when adding new files to the repo.  The  -a  means \"commit all my changes\", and the  -m  lets you write a note about the commit (you should always do this, and hopefully make it descriptive).", 
-            "title": "Write code and commit"
-        }, 
-        {
-            "location": "/contributing/#submit-a-pr", 
-            "text": "You're almost there!  Browse to your fork (https://github.com/user123/Plots.jl).  Most likely there will be a section just above the code that asks if you'd like to create a PR from the  user123-dev  branch.  If not, you can click the \"New pull request\" button.  Make sure the \"base\" branch is JuliaPlots  master  and the \"compare\" branch is  user123-dev .  Add an informative title and description, and link to relevant issues or discussions, then click \"Create pull request\".  You may get some questions about it, and possibly suggestions of how to fix it to be \"merge-ready\".  Then hopefully it gets merged... thanks for the contribution!!", 
-            "title": "Submit a PR"
-        }, 
-        {
-            "location": "/contributing/#cleanup", 
-            "text": "After all of this, you will likely want to go back to using  master  (or possibly using a tagged release, once your feature is tagged).  To clean up:  git fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit branch -d user123-dev  This catches your local master branch up to the remote master branch, then deletes the dev branch.  If you want to return to tagged releases, run  Pkg.free(\"Plots\")  from the Julia REPL.", 
-            "title": "Cleanup"
-        }, 
-        {
-            "location": "/contributing/#tags", 
-            "text": "New tags should represent \"stable releases\"... those that you are happy to distribute to end-users.  Effort should be made to ensure tests pass before creating a new tag, and ideally new tests would be added which test your new functionality.  This is, of course, a much trickier problem for visualization libraries as compared to other software.  See the  testing section  below.  Only JuliaPlots members may create a new tag.  To create a new tag, we'll create a new release on Github and use  attobot  to generate the PR to METADATA.  Create a new release at https://github.com/JuliaPlots/Plots.jl/releases/new (of course replacing the repo name with the package you're tagging).  The version number (vMAJOR.MINOR.PATCH) should be incremented using  semver , which generally means that breaking changes should increment the major number, backwards compatible changes should increment the minor number, and bug fixes should increment the patch number.  For \"v0.x.y\" versions, this requirement is relaxed.  The minor version can be incremented for breaking changes.", 
-            "title": "Tags"
-        }, 
-        {
-            "location": "/contributing/#testing", 
-            "text": "", 
-            "title": "Testing"
-        }, 
-        {
-            "location": "/contributing/#visualregressiontests", 
-            "text": "Testing in Plots is done with the help of  VisualRegressionTests .  Reference images are stored in  PlotReferenceImages . Sometimes the reference images need to be updated (if features change, or if the underlying backend changes).  VisualRegressionTests makes it somewhat painless to update the reference images:  From the Julia REPL, run  include(Pkg.dir(\"Plots\",\"test\",\"runtests.jl\")) .  This will try to plot the tests, and then compare the results to the stored reference images.  If the test output is sufficiently different than the reference output (using Tim Holy's excellent algorithm for the comparison), then a GTK window will pop up with a side-by-side comparison.  You can choose to replace the reference image, or not, depending on whether a real error was discovered.  After the reference images have been updated, navigate to PlotReferenceImages and push the changes to Github:  cd ~/.julia/v0.5/PlotReferenceImages\ngit add Plots/*\ngit commit -am  a useful message \ngit push  If there are mis-matches due to bugs,  don't update the reference image .", 
-            "title": "VisualRegressionTests"
-        }, 
-        {
-            "location": "/contributing/#travis", 
-            "text": "On a  git push , Travis tests will be triggered.  This runs the same tests as above, downloading and comparing to the reference images, though with a larger tolerance for differences.  When Travis errors, it may be due to timeouts, stale reference images, or a host of other reasons.  Check the  Travis logs  to determine the reason.  If the tests are broken because of a new commit, consider rolling back.", 
-            "title": "Travis"
-        }, 
-        {
-            "location": "/ecosystem/", 
-            "text": "Plots is great on its own, but the real power comes from the ecosystem surrounding it.  The design of Plots (and more specifically \nRecipesBase\n) is to bind together disparate functionality into a cohesive and consistent user experience.  Some packages may choose to implement recipes to visualize their custom types.  Others may extend the functionality of Plots for Base types.  On this page I'll attempt to collect and display some of the many things you can do using the ecosystem which has developed around the Plots core.\n\n\n\n\n\n\nJuliaPlots\n\n\nThe \nJuliaPlots\n organization builds and maintains much of the most commonly used functionality external to core Plots, as well as RecipesBase, PlotUtils, the documentation, and more.\n\n\n\n\nStatPlots\n\n\nMuch of this functionality once existed in core Plots, but has been moved out to facilitate a clean separation between those features that are truly \"core\" and those which are specific to certain types of workflows and disciplines.  \n\n\n\n\n\n\nTypes:\n\n\n\n\nDataFrames\n\n\nDistributions\n\n\n\n\nRecipes:\n\n\n\n\n\n\nhistogram/histogram2d\n\n\n\n\nboxplot\n\n\nviolin\n\n\nmarginalhist\n\n\ncorrplot/cornerplot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotRecipes\n\n\nA catch-all for functionality and recipes which don't have a home elsewhere.  Graphs (networks of nodes and edges), maps/shapes, finance, and more.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommunity packages\n\n\n\n\nAtariAlgos\n\n\nAtariAlgos wraps the ArcadeLearningEnvironment as an implementation of an AbstractEnvironment from the Reinforce interface. This allows it to be used as a plug-and-play module with general reinforcement learning agents.\n\n\nGames can also be \"plotted\" using Plots.jl, allowing it to be a component of more complex visualizations for tracking learning progress and more, as well as making it easy to create animations.\n\n\n\n\n\n\nReinforce\n\n\nReinforce.jl is an interface for Reinforcement Learning. It is intended to connect modular environments, policies, and solvers with a simple interface.\n\n\n\n\n\n\nJuliaML\n\n\nTools, models, and math related to machine learning in Julia.\n\n\n\n\n\n\nAugmentor\n\n\nAugmentor is an image-augmentation library designed to render the process of artificial dataset enlargement more convenient, less error prone, and easier to reproduce. This is achieved using probabilistic transformation pipelines.\n\n\n\n\n\n\nDifferentialEquations\n\n\nDifferentialEquations.jl is a package for solving numerically solving differential equations in Julia by Chris Rackauckas. The purpose of this package is to supply efficient Julia implementations of solvers for various differential equations. Equations within the realm of this package include ordinary differential equations (ODEs), stochastic ordinary differential equations (SODEs or SDEs), stochastic partial differential equations (SPDEs), partial differential equations (with both finite difference and finite element methods), differential algebraic equations, and differential delay equations. It includes well-optimized implementations classic algorithms and ones from recent research, including algorithms optimized for high-precision and HPC applications.\n\n\nAll of the solvers return solution objects which are set up with plot recipes to give informative default plots.\n\n\n\n\n\n\nPhyloTrees\n\n\nThe PhyloTrees.jl package provides a type representation of phylogenetic trees. Simulation, inference, and visualization functionality is also provided for phylogenetic trees. A plot recipe allows the structure of phylogenetic trees to be drawn by whichever plotting backend is preferred by the user.\n\n\n\n\n\n\nEEG\n\n\nProcess EEG files and visualize brain activity.\n\n\n\n\n\n\n\n\nImplicitEquations\n\n\nIn a paper, Tupper presents a method for graphing two-dimensional implicit equations and inequalities. This package gives an implementation of the paper's basic algorithms to allow the Julia user to naturally represent and easily render graphs of implicit functions and equations.\n\n\n\n\n\n\nControlSystems\n\n\nA control systems design toolbox for Julia.  This toolbox works similar to that of other major computer-aided control systems design (CACSD) toolboxes. Systems can be created in either a transfer function or a state space representation. These systems can then be combined into larger architectures, simulated in both time and frequency domain, and analyzed for stability/performance properties.\n\n\n\n\n\n\nValueHistories\n\n\nUtility package for efficient tracking of optimization histories, training curves or other information of arbitrary types and at arbitrarily spaced sampling times\n\n\n\n\n\n\nApproxFun\n\n\nApproxFun is a package for approximating functions. It is heavily influenced by the Matlab package Chebfun and the Mathematica package RHPackage.\n\n\n\n\n\n\nAverageShiftedHistograms\n\n\nDensity estimation using Average Shifted Histograms.\n\n\n\n\n\n\nMLPlots\n\n\nCommon plotting recipes for statistics and machine learning.\n\n\n\n\n\n\n\n\nLazySets\n\n\nLazySets.jl is a Julia package for calculus with convex sets. The principle behind LazySets is to wrap set computations into specialized types, delaying the evaluation of the result of an expression until it is necessary. Combining lazy operations in high dimensions and explicit computations in low dimensions, the library can be applied to solve complex, high-dimensional problems.\n\n\nReachability plot of a \ntwo-mode hybrid system\n:\n\n\n\n\n\n\nTODO:\n\n\n\n\nLosses\n\n\n\n\nIterativeSolvers\n\n\n\n\nSymPy\n\n\n\n\nOnlineStats\n\n\n\n\nRobotlib\n\n\n\n\nJWAS\n\n\n\n\nQuantEcon\n\n\n\n\nReinforce\n\n\n\n\nOptim\n\n\n\n\nTransformations / Flow", 
-            "title": "Ecosystem"
-        }, 
-        {
-            "location": "/ecosystem/#juliaplots", 
-            "text": "The  JuliaPlots  organization builds and maintains much of the most commonly used functionality external to core Plots, as well as RecipesBase, PlotUtils, the documentation, and more.", 
-            "title": "JuliaPlots"
-        }, 
-        {
-            "location": "/ecosystem/#statplots", 
-            "text": "Much of this functionality once existed in core Plots, but has been moved out to facilitate a clean separation between those features that are truly \"core\" and those which are specific to certain types of workflows and disciplines.      Types:   DataFrames  Distributions   Recipes:    histogram/histogram2d   boxplot  violin  marginalhist  corrplot/cornerplot", 
-            "title": "StatPlots"
-        }, 
-        {
-            "location": "/ecosystem/#plotrecipes", 
-            "text": "A catch-all for functionality and recipes which don't have a home elsewhere.  Graphs (networks of nodes and edges), maps/shapes, finance, and more.", 
-            "title": "PlotRecipes"
-        }, 
-        {
-            "location": "/ecosystem/#community-packages", 
-            "text": "", 
-            "title": "Community packages"
-        }, 
-        {
-            "location": "/ecosystem/#atarialgos", 
-            "text": "AtariAlgos wraps the ArcadeLearningEnvironment as an implementation of an AbstractEnvironment from the Reinforce interface. This allows it to be used as a plug-and-play module with general reinforcement learning agents.  Games can also be \"plotted\" using Plots.jl, allowing it to be a component of more complex visualizations for tracking learning progress and more, as well as making it easy to create animations.", 
-            "title": "AtariAlgos"
-        }, 
-        {
-            "location": "/ecosystem/#reinforce", 
-            "text": "Reinforce.jl is an interface for Reinforcement Learning. It is intended to connect modular environments, policies, and solvers with a simple interface.", 
-            "title": "Reinforce"
-        }, 
-        {
-            "location": "/ecosystem/#juliaml", 
-            "text": "Tools, models, and math related to machine learning in Julia.", 
-            "title": "JuliaML"
-        }, 
-        {
-            "location": "/ecosystem/#augmentor", 
-            "text": "Augmentor is an image-augmentation library designed to render the process of artificial dataset enlargement more convenient, less error prone, and easier to reproduce. This is achieved using probabilistic transformation pipelines.", 
-            "title": "Augmentor"
-        }, 
-        {
-            "location": "/ecosystem/#differentialequations", 
-            "text": "DifferentialEquations.jl is a package for solving numerically solving differential equations in Julia by Chris Rackauckas. The purpose of this package is to supply efficient Julia implementations of solvers for various differential equations. Equations within the realm of this package include ordinary differential equations (ODEs), stochastic ordinary differential equations (SODEs or SDEs), stochastic partial differential equations (SPDEs), partial differential equations (with both finite difference and finite element methods), differential algebraic equations, and differential delay equations. It includes well-optimized implementations classic algorithms and ones from recent research, including algorithms optimized for high-precision and HPC applications.  All of the solvers return solution objects which are set up with plot recipes to give informative default plots.", 
-            "title": "DifferentialEquations"
-        }, 
-        {
-            "location": "/ecosystem/#phylotrees", 
-            "text": "The PhyloTrees.jl package provides a type representation of phylogenetic trees. Simulation, inference, and visualization functionality is also provided for phylogenetic trees. A plot recipe allows the structure of phylogenetic trees to be drawn by whichever plotting backend is preferred by the user.", 
-            "title": "PhyloTrees"
-        }, 
-        {
-            "location": "/ecosystem/#eeg", 
-            "text": "Process EEG files and visualize brain activity.", 
-            "title": "EEG"
-        }, 
-        {
-            "location": "/ecosystem/#implicitequations", 
-            "text": "In a paper, Tupper presents a method for graphing two-dimensional implicit equations and inequalities. This package gives an implementation of the paper's basic algorithms to allow the Julia user to naturally represent and easily render graphs of implicit functions and equations.", 
-            "title": "ImplicitEquations"
-        }, 
-        {
-            "location": "/ecosystem/#controlsystems", 
-            "text": "A control systems design toolbox for Julia.  This toolbox works similar to that of other major computer-aided control systems design (CACSD) toolboxes. Systems can be created in either a transfer function or a state space representation. These systems can then be combined into larger architectures, simulated in both time and frequency domain, and analyzed for stability/performance properties.", 
-            "title": "ControlSystems"
-        }, 
-        {
-            "location": "/ecosystem/#valuehistories", 
-            "text": "Utility package for efficient tracking of optimization histories, training curves or other information of arbitrary types and at arbitrarily spaced sampling times", 
-            "title": "ValueHistories"
-        }, 
-        {
-            "location": "/ecosystem/#approxfun", 
-            "text": "ApproxFun is a package for approximating functions. It is heavily influenced by the Matlab package Chebfun and the Mathematica package RHPackage.", 
-            "title": "ApproxFun"
-        }, 
-        {
-            "location": "/ecosystem/#averageshiftedhistograms", 
-            "text": "Density estimation using Average Shifted Histograms.", 
-            "title": "AverageShiftedHistograms"
-        }, 
-        {
-            "location": "/ecosystem/#mlplots", 
-            "text": "Common plotting recipes for statistics and machine learning.", 
-            "title": "MLPlots"
-        }, 
-        {
-            "location": "/ecosystem/#lazysets", 
-            "text": "LazySets.jl is a Julia package for calculus with convex sets. The principle behind LazySets is to wrap set computations into specialized types, delaying the evaluation of the result of an expression until it is necessary. Combining lazy operations in high dimensions and explicit computations in low dimensions, the library can be applied to solve complex, high-dimensional problems.  Reachability plot of a  two-mode hybrid system :    TODO:", 
-            "title": "LazySets"
-        }, 
-        {
-            "location": "/ecosystem/#losses", 
-            "text": "", 
-            "title": "Losses"
-        }, 
-        {
-            "location": "/ecosystem/#iterativesolvers", 
-            "text": "", 
-            "title": "IterativeSolvers"
-        }, 
-        {
-            "location": "/ecosystem/#sympy", 
-            "text": "", 
-            "title": "SymPy"
-        }, 
-        {
-            "location": "/ecosystem/#onlinestats", 
-            "text": "", 
-            "title": "OnlineStats"
-        }, 
-        {
-            "location": "/ecosystem/#robotlib", 
-            "text": "", 
-            "title": "Robotlib"
-        }, 
-        {
-            "location": "/ecosystem/#jwas", 
-            "text": "", 
-            "title": "JWAS"
-        }, 
-        {
-            "location": "/ecosystem/#quantecon", 
-            "text": "", 
-            "title": "QuantEcon"
-        }, 
-        {
-            "location": "/ecosystem/#reinforce_1", 
-            "text": "", 
-            "title": "Reinforce"
-        }, 
-        {
-            "location": "/ecosystem/#optim", 
-            "text": "", 
-            "title": "Optim"
-        }, 
-        {
-            "location": "/ecosystem/#transformations-flow", 
-            "text": "", 
-            "title": "Transformations / Flow"
-        }, 
-        {
             "location": "/install/", 
             "text": "Install\n\n\nFirst, add the package\n\n\nPkg\n.\nadd\n(\nPlots\n)\n\n\n\n# if you want the latest features:\n\n\nPkg\n.\ncheckout\n(\nPlots\n)\n\n\n\n\n\n\nthen get any plotting packages you need (obviously, you should get at least one \nbackend\n).\n\n\nPkg\n.\nadd\n(\nPyPlot\n)\n\n\nPkg\n.\nadd\n(\nGR\n)\n\n\nPkg\n.\nadd\n(\nUnicodePlots\n)\n\n\nPkg\n.\nadd\n(\nPlotlyJS\n)\n\n\n\n\n\n\nFinally, you may wish to add some extensions from the \nPlots ecosystem\n:\n\n\nPkg\n.\nadd\n(\nStatPlots\n)\n\n\nPkg\n.\nadd\n(\nPlotRecipes\n)\n\n\n\n\n\n\n\n\n\n\nInitialize\n\n\nusing\n \nPlots\n \n# or StatPlots, or PlotRecipes\n\n\n\n\n\n\nChoose a backend\n, and optionally override default settings at the same time:\n\n\npyplot\n(\nsize\n \n=\n \n(\n300\n,\n300\n),\n \nlegend\n \n=\n \nfalse\n)\n\n\n\n\n\n\n Tip: Backend methods are lowercase, and match the corresponding backend package name. \n\n\n\n Tip: The underlying plotting backends are not imported and initialized immediately, thus they are loaded on demand to reduce dependencies. \n\n\n\n Tip: Plots will pick a default backend for you automatically based on what backends are installed.  You can override this choice by setting an environment variable in your ~/.juliarc.jl file: ENV[\"PLOTS*DEFAULT*BACKEND\"] = \"PlotlyJS\" \n\n\n\n Tip: You can override standard default values in your ~/.juliarc.jl file: PLOTS_DEFAULTS = Dict(:markersize => 10, :legend => false)", 
             "title": "Installation"
@@ -939,6 +589,356 @@
             "location": "/supported/#scales", 
             "text": "You need a Frames Capable browser to view this content.", 
             "title": "Scales"
+        }, 
+        {
+            "location": "/learning/", 
+            "text": "Tutorials\n\n\n\n\nStart with the tutorial\n\n\nSection from Chris Rackauckas' awesome earlier tutorial\n\n\nMachine Learning and Visualization in Julia\n\n\nQuant Econ tutorial\n\n\nPlotting section of a Julia wiki\n\n\n\n\n\n\nDemos, Examples and Notebooks\n\n\n\n\nVisualizing Graphs in Julia using Plots and PlotRecipes\n\n\nExamplePlots\n\n\nSome notebooks\n\n\n\n\n\n\nVideo tutorials\n\n\n\n\nPlots with Plots - JuliaCon 2016\n\n\n\n\n\n\n\nEcosystem and Pipeline\n\n\nhttp://www.breloff.com/plots-video/\n\n\n\n\n\n\n\nPlots in the wild\n\n\nTODO (See the \necosystem\n)", 
+            "title": "Learning"
+        }, 
+        {
+            "location": "/learning/#tutorials", 
+            "text": "Start with the tutorial  Section from Chris Rackauckas' awesome earlier tutorial  Machine Learning and Visualization in Julia  Quant Econ tutorial  Plotting section of a Julia wiki", 
+            "title": "Tutorials"
+        }, 
+        {
+            "location": "/learning/#demos-examples-and-notebooks", 
+            "text": "Visualizing Graphs in Julia using Plots and PlotRecipes  ExamplePlots  Some notebooks", 
+            "title": "Demos, Examples and Notebooks"
+        }, 
+        {
+            "location": "/learning/#video-tutorials", 
+            "text": "", 
+            "title": "Video tutorials"
+        }, 
+        {
+            "location": "/learning/#plots-with-plots-juliacon-2016", 
+            "text": "", 
+            "title": "Plots with Plots - JuliaCon 2016"
+        }, 
+        {
+            "location": "/learning/#ecosystem-and-pipeline", 
+            "text": "http://www.breloff.com/plots-video/", 
+            "title": "Ecosystem and Pipeline"
+        }, 
+        {
+            "location": "/learning/#plots-in-the-wild", 
+            "text": "TODO (See the  ecosystem )", 
+            "title": "Plots in the wild"
+        }, 
+        {
+            "location": "/contributing/", 
+            "text": "This is a guide to contributing to Plots and the surrounding ecosystem.  Plots is a complex and far-reaching suite of software components, and as such will be most effective when the community contributes their own expertise, knowledge, perspective, and effort.  The document is roughly broken up into the following categories, and after reading this introduction you should feel comfortable skipping to the section(s) that interest you the most:\n\n\n\n\nThe JuliaPlots Organization\n: Packages and dependencies\n\n\nChoosing a Project\n: Fix bugs, add features, create recipes\n\n\nKey Design Principles\n: Design goals and considerations\n\n\nCode Organization\n: Where to look when implementing new features\n\n\nGit-fu (or... the mechanics of contributing)\n: Git (how to commit/push), Github (how to submit a PR), Testing (VisualRegressionTests, Travis)\n\n\n\n\nWhen in doubt, use this handy dandy logic designed by a \nlegendary open source guru\n...\n\n\n\n\n\n\n\n\nThe JuliaPlots Organization\n\n\nJuliaPlots\n is the home for all things Plots.  It was founded by \nTom Breloff\n, and extended through many contributions from \nmembers\n and others.  The first step in contributing will be to understand which package(s) are appropriate destinations for your code.\n\n\n\n\nPlots\n\n\nThis is the core package for:\n\n\n\n\nDefinitions of \nplot\n/\nplot!\n\n\nThe \ncore processing pipeline\n\n\nBase \nrecipes\n for \npath\n, \nscatter\n, \nbar\n, and many others\n\n\nGeneric \noutput\n methods\n\n\nGeneric \nlayout\n methods\n\n\nGeneric \nanimation\n methods\n\n\nGeneric types: Plot, Subplot, Axis, Series, ...\n\n\nConveniences: \ngetindex\n/\nsetindex\n, \npush!\n/\nappend!\n, \nunzip\n, \ncycle\n, ...\n\n\n\n\nThis package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.\n\n\n\n\nBackends\n\n\nIn Julia versions v0.5 and earlier, backend code (such as code linking Plots with GR) lived in the \nPlots/src/backends\n directory.  As such, backend code should be contributed to core Plots.\n\n\nStarting with v0.6, the backend code will live in separate repos, and loaded on demand.  For example, the GR backend is being developed at \nPlotsGR\n.  Users targeting v0.6 and later should contribute to the respective backend package \"Plots[backend].jl\".\n\n\nNote: As of 2/22/17, the \nreorg\n branch of Plots is needed for compatibility with the new backend repos.  This will be merged into the master branch sometime after the release of v0.6.\n\n\nThis redesign will help with improved support for precompilation, and a cleaner separation of \"generic plotting\" development and \"backend-specific\" development.\n\n\n\n\nPlotDocs\n\n\nPlotDocs is the home of this documentation.  The documentation is built using the \"material\" theme in \"mkdocs\".  For those contributing documentation (to the \ndocs\n directory of PlotDocs), it must be subsequently built and deployed using the following instructions:\n\n\n# Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page\n\n# To build, run from inside the PlotDocs directory:\n#     mkdocs build --clean\n# (optional) Make the githubio remote point to JuliaPlots/juliaplots.github.io:\n#     git remote add githubio git@github.com:JuliaPlots/juliaplots.github.io.git\n# Add files, commit, then push:\n#     git push origin master\n# Push just the site directory to the master branch of githubio\n#     git subtree push --prefix site githubio master\n\n\n\n\n\n\n\nRecipesBase\n\n\nSeldom updated, but essential.  This is the package that you would depend on to create third-party recipes.  It contains the bare minimum to define new recipes.\n\n\n\n\nPlotUtils\n\n\nComponents that could be used for other (non-Plots) packages.  Anything that is sufficiently generic and useful could be contributed here.\n\n\n\n\nColor (conversions, construction, conveniences)\n\n\nColor gradients/maps\n\n\nTick computation\n\n\n\n\n\n\nPlotThemes\n\n\nVisual themes (i.e. attribute defaults) such as \"dark\", \"orange\", etc.\n\n\n\n\nStatPlots\n\n\nAn extension of Plots: Statistical plotting and tabular data.  Complex histograms and densities, correlation plots, and support for DataFrames.  Anything related to stats or special handling for table-like data should live here.\n\n\n\n\nPlotRecipes\n\n\nAn extension of StatPlots: Graphs, maps, and more.  If it's not a \"base recipe\", and also not clearly \"statistical\" in nature, then this package might be a good home.\n\n\n\n\nMLPlots\n\n\nAn extension of PlotRecipes, geared toward Machine Learning applications: neural nets, spike trains, ROC curves, and more.\n\n\n\n\nGGPlots\n\n\nA prototype API/interface for \"Grammar of Graphics\" style plotting.  This likely wouldn't add actual functionality, but would give users coming from R/ggplot2 a simple way to avoid Gadfly.  I (Tom) wrote the prototype to show how easy it is, but since I dislike GoG-style, I never finished it.  Completing this package would be a great self-contained project for interested parties.\n\n\n\n\n\n\nChoosing a Project\n\n\nFor people new to Plots, the first step should be to read (and reread) the documentation.  Code up some examples, play with the attributes, and try out multiple backends.  It's really hard to contribute to a project that you don't know how to use.\n\n\n\n\nBeginner Project Ideas\n\n\n\n\nCreate a new recipe\n: Preferably something you care about.  Maybe you want custom overlays of heatmaps and scatters?  Maybe you have an input format that isn't currently supported?  Make a recipe for it so you can just \nplot(thing)\n.\n\n\nFix bugs\n: There are many \"bugs\" which are specific to one backend, or incorrectly implement features that are infrequently used.  Some ideas can be found in the \nissues marked easy\n.\n\n\nAdd recipes to external packages\n: By depending on RecipesBase, a package can define a recipe for their custom types.  Submit a PR to a package you care about that adds a recipe for that package.  For example, see \nthis PR to add OHLC plots for TimeSeries.jl\n.\n\n\n\n\n\n\nIntermediate Project Ideas\n\n\n\n\nImprove your favorite backend\n: There are many missing features and other improvements that can be made to individual backends.  Most issues specific to a backend have a \nspecial tag\n.\n\n\nHelp with documentation\n: This could come in the form of improved descriptions, additional examples, or full tutorials.  Please contribute improvements to \nPlotDocs\n.\n\n\nHelp with the v0.6 reorganization\n: The \nreorg\n requires the annoying effort of creating new repos (PlotsPyPlot, PlotsPlotlyJS, etc) that hold the backend code.  I consider this intermediate because you need to know a little about Plots and git, but it's fairly straightforward to follow the model of PlotsGR.\n\n\nExpand StatPlots functionality\n:  qqplot, DataStreams, or anything else you can think of.\n\n\n\n\n\n\nAdvanced Project Ideas\n\n\n\n\nColorBar redesign\n: Colorbars \nneed serious love\n... this would likely require a new Colorbar type that links with the appropriate Series object(s) and is independent during subplot layout.  We want to allow many series (possibly from multiple subplots) to use the same clims and to share a colorbar, or have multiple colorbars that can be flexibly positioned.\n\n\nPlotSpec redesign\n: This \nlong standing redesign proposal\n could allow generic serialization/deserialization of Plot data and attributes, as well as some improvements/optimizations when mutating plots.  For example, we could lazily compute attribute values, and intelligently flag them as \"dirty\" when they change, allowing backends to skip much of the wasted processing and unnecessary rebuilding that currently occurs.\n\n\nImprove graph recipes\n: Lots to do here: clean up visuals, improve edge drawing, implement \nlayout algorithms\n, and much more.\n\n\n\n\n\n\n\n\nKey Design Principles\n\n\nFlexible and generic... these are the core principles underlying Plots development, and also tend to cause confusion when users laser-focus on their specific use case.\n\n\nI (Tom) have painstakingly designed the core logic to support nearly any use case that exists or may exist.  I don't pretend to know how you want to use Plots, or what type of data you might pass in, or what sort of recipe you may want to apply.  As such, I try to avoid unnecessary restriction of types, or forced conversions, or many other pitfalls of limited visualization frameworks.  The result is a highly modular framework which is limited by your imagination.\n\n\nWhen contributing new features to Plots (or the surrounding ecosystem), you should strive for this mentality as well.  New features should be left as generic as possible, while avoiding obvious feature clash.\n\n\nAs an example, you may want a new recipe that shows a histogram when passed Float64 numbers, but shows counts of every unique value for strings.  So you make a recipe that works perfectly for your purpose:\n\n\nusing\n \nPlots\n,\n \nStatsBase\n\n\ngr\n(\nsize\n=\n(\n300\n,\n300\n),\n \nleg\n=\nfalse\n)\n\n\n\n@userplot\n \nMyCount\n\n\n@recipe\n \nfunction\n \nf\n(\nmc\n::\nMyCount\n)\n\n    \n# get the array from the args field\n\n    \narr\n \n=\n \nmc\n.\nargs\n[\n1\n]\n\n\n    \nT\n \n=\n \ntypeof\n(\narr\n)\n\n    \nif\n \nT\n.\nparameters\n[\n1\n]\n \n==\n \nFloat64\n\n        \nseriestype\n \n:=\n \n:\nhistogram\n\n        \narr\n\n    \nelse\n\n        \nseriestype\n \n:=\n \n:\nbar\n\n        \ncm\n \n=\n \ncountmap\n(\narr\n)\n\n        \nx\n \n=\n \nsort!\n(\ncollect\n(\nkeys\n(\ncm\n)))\n\n        \ny\n \n=\n \n[\ncm\n[\nxi\n]\n \nfor\n \nxi\n=\nx\n]\n\n        \nx\n,\n \ny\n\n    \nend\n\n\nend\n\n\n\n\n\n\nThe recipe defined above is a \"user recipe\", which builds a histogram for arrays of Float64, and otherwise shows a \"countmap\" of sorted unique values and their observed counts.  You only care about Float64 and String, and so you're results are fine:\n\n\nmycount\n(\nrand\n(\n500\n))\n\n\n\n\n\n\n\n\nmycount\n(\nrand\n([\nA\n,\nB\n,\nC\n],\n100\n))\n\n\n\n\n\n\n\n\nBut you didn't consider the person that, in the future, might want to pass integers to this recipe:\n\n\nmycount\n(\nrand\n(\n1\n:\n500\n,\n \n500\n))\n\n\n\n\n\n\n\n\nThis user expected integers to be treated as numbers and output a histogram, but instead they were treated like strings.  A simple solution would have been to replace \nif T.parameters[1] == Float64\n with \nif T.parameters[1] \n: Number\n.  However, should we even depend on \nT\n having it's first parameter be the element type? (No)  So even better would be \nif eltype(arr) \n: Number\n, which now allows any container with any numeric type to trigger the \"histogram\" logic.\n\n\nThis simple example outlines a common theme when developing Plots (or really any other Julia package).  Try to create the most generic implementation you can think of while maintaining correctness.  You don't know what crazy types someone else will use to try to access your functionality.\n\n\n\n\n\n\nCode Organization\n\n\nGenerally speaking, similar functionality is kept within the same file.  Within the \nsrc\n directory, much of the files should be self explanatory (for example, you'll find animation methods/macros in the \nanimation.jl\n file), but some could use a summary of contents:\n\n\n\n\nPlots.jl\n: imports, exports, shorthands, and initialization\n\n\nargs.jl\n: defaults, aliases, and attribute processing\n\n\ncomponents.jl\n: shapes, fonts, and other assorted goodies\n\n\npipeline.jl\n: code which builds the plots and subplots through recursive application of recipes\n\n\nrecipes.jl\n: primarily core series recipes\n\n\nseries.jl\n: core input data handling and processing\n\n\nutils.jl\n: lots of functionality that didn't have a home... \ngetindex\n/\nsetindex!\n for \nPlot\n/\nSubplot\n/\nAxis\n/\nSeries\n, \npush!\n/\nappend!\n for adding data to a series, \ncycle\n/\nunzip\n and similar utility functions, \nSegments\n/\nSegmentsIterator\n, etc.\n\n\n\n\nThese files should probably be reorganized, but until then...\n\n\n\n\nCreating new backends\n\n\nModel new backends on \nPlotsGR\n.  Implement the callbacks that are appropriate, especially \n_display\n and \n_show\n for GUI and image output respectively.\n\n\n\n\nStyle/Design Guidelines\n\n\n\n\nMake every effort to minimize external dependencies and exports.  Requiring new dependencies is the most likely way to make your PR \"unmergeable\".\n\n\nBe careful adding method signatures on existing methods with Base types (Array, etc) as you may override key functionality.  This is especially true with recipes.  Consider wrapping inputs in a new type (like in \"user recipes\").\n\n\nTerse code is ok, as is verbose code.  What's important is understanding and context.  Will someone reading your code know what you mean?  If not, consider writing comments to describe your reason for the design, or describe the hack you just implemented in clear prose.  Sometimes \nit's ok that your comments are longer than your code\n.\n\n\nPick your project for yourself, but write code for others.  It should be generic and useful beyond your needs, and you should \nnever break functionality\n because you can't figure out how to implement something well.  Spend more time on it... there's always a better way.\n\n\n\n\n\n\n\n\nGit-fu (or... the mechanics of contributing)\n\n\nMany people have trouble with Git.  More have trouble with Github.  I think much of the confusion happens when you run commands without understanding what they do.  We're all guilty of it, but recovering usually means \"starting over\".  In this section, I'll try to keep a simple, practical approach to making PRs.  It's worked well for me, though YMMV.\n\n\n\n\nGuidelines\n\n\nHere are some guidelines for the development workflow (Note: Even if you've made 20 PRs to Plots in the past, please read this as it may be different than past guidelines):\n\n\n\n\nCommit to a branch that belongs to you.\n  Typically that means you should give your branches names that are unique to you, and that might include information on the feature you're developing.  For example, I might choose to \ngit checkout -b tb-fonts\n when starting work on fonts.\n\n\nOpen a PR against master.\n  \nmaster\n is the \"bleeding edge\".  (Note: I used to recommend PRing to \ndev\n)\n\n\nOnly merge others changes when absolutely necessary.\n You should prefer to use \ngit rebase origin/master\n instead of \ngit merge origin/master\n.  A rebase replays your recent commits on top of the most recent \nmaster\n, avoiding complicated and messy merge commits and generally avoiding confusion.  If you follow the first rule, then you likely won't get yourself in trouble.  Rebase horror stories generally result when many people are working on the same branch.  I find \nthis resource\n is great for understanding the important parts of \ngit rebase\n.\n\n\n\n\n\n\n\n\nDevelopment Workflow\n\n\nMy suggestions for a smooth development workflow:\n\n\n\n\nFork the repo\n\n\nNavigate to the repo site (https://github.com/JuliaPlots/Plots.jl) and click the \"Fork\" button.  You might get a choice of which account or organization to place the fork.  I'll assume going forward that you forked to Github username \nuser123\n.\n\n\n\n\nSet up the git remote\n\n\nNavigate to the local repo.  Note: I'm assuming that you do development in your Julia directory, and using Mac/Linux.  Adjust as needed.\n\n\ncd ~/.julia/v0.5/Plots\ngit remote add forked git@github.com:user123/Plots.jl.git\n\n\n\n\n\nAfter running these commands, \ngit remote -v\n should show two remotes: \norigin\n (the main repo) and \nforked\n (your fork).  A remote is simply a reference/pointer to the github site hosting the repo, and a fork is simply any other git repo with a special link to the originating repo.\n\n\n\n\nCreate a new branch\n\n\nIf you're just starting work on a new feature:\n\n\ngit fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit checkout -b user123-myfeature\ngit push -u forked user123-myfeature\n\n\n\n\n\nThe first three lines are meant to ensure you start from the main repo's master branch.  The \n--ff-only\n flag ensures you will only \"fast forward\" to newer commits, and avoids creating a new merge commit when you didn't mean to.  The \ngit checkout\n line both creates a new branch (the \n-b\n) pointing to the current commit and makes that branch current.  The \ngit push\n line adds this branch to your Github fork, and sets up the local branch to \"track\" (\n-u\n) the remote branch for subsequent \ngit push\n and \ngit pull\n calls.\n\n\n\n\nor... Reuse an old branch\n\n\nIf you have an ongoing development branch (say, \nuser123-dev\n) which you'd prefer to use (and which has previously been merged into master!) then you can get that up to date with:\n\n\ngit fetch origin\ngit checkout user123-dev\ngit merge --ff-only origin/master\ngit push forked user123-dev\n\n\n\n\n\nWe update our local copy of origin, checkout the dev branch, then attempt to \"fast-forward\" to the current master.  If successful, we push the branch back to our forked repo.\n\n\n\n\nWrite code and commit\n\n\nAfter powering up your favorite editor (maybe \nJuno\n?) and making some code changes to the repo, you'll want to \"commit\" or save a snapshot of all the changes you made.  After committing, you can \"push\" those changes to your forked repo on Github:\n\n\ngit add src/my_new_file.jl\ngit commit -am \nmy commit message\n\ngit push forked user123-dev\n\n\n\n\n\nThe first line is optional, and is used when adding new files to the repo.  The \n-a\n means \"commit all my changes\", and the \n-m\n lets you write a note about the commit (you should always do this, and hopefully make it descriptive).\n\n\n\n\nSubmit a PR\n\n\nYou're almost there!  Browse to your fork (https://github.com/user123/Plots.jl).  Most likely there will be a section just above the code that asks if you'd like to create a PR from the \nuser123-dev\n branch.  If not, you can click the \"New pull request\" button.\n\n\nMake sure the \"base\" branch is JuliaPlots \nmaster\n and the \"compare\" branch is \nuser123-dev\n.  Add an informative title and description, and link to relevant issues or discussions, then click \"Create pull request\".  You may get some questions about it, and possibly suggestions of how to fix it to be \"merge-ready\".  Then hopefully it gets merged... thanks for the contribution!!\n\n\n\n\nCleanup\n\n\nAfter all of this, you will likely want to go back to using \nmaster\n (or possibly using a tagged release, once your feature is tagged).  To clean up:\n\n\ngit fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit branch -d user123-dev\n\n\n\n\n\nThis catches your local master branch up to the remote master branch, then deletes the dev branch.  If you want to return to tagged releases, run \nPkg.free(\"Plots\")\n from the Julia REPL.\n\n\n\n\n\n\nTags\n\n\nNew tags should represent \"stable releases\"... those that you are happy to distribute to end-users.  Effort should be made to ensure tests pass before creating a new tag, and ideally new tests would be added which test your new functionality.  This is, of course, a much trickier problem for visualization libraries as compared to other software.  See the \ntesting section\n below.\n\n\nOnly JuliaPlots members may create a new tag.  To create a new tag, we'll create a new release on Github and use \nattobot\n to generate the PR to METADATA.  Create a new release at https://github.com/JuliaPlots/Plots.jl/releases/new (of course replacing the repo name with the package you're tagging).\n\n\nThe version number (vMAJOR.MINOR.PATCH) should be incremented using \nsemver\n, which generally means that breaking changes should increment the major number, backwards compatible changes should increment the minor number, and bug fixes should increment the patch number.  For \"v0.x.y\" versions, this requirement is relaxed.  The minor version can be incremented for breaking changes.\n\n\n\n\n\n\nTesting\n\n\n\n\nVisualRegressionTests\n\n\nTesting in Plots is done with the help of \nVisualRegressionTests\n.  Reference images are stored in \nPlotReferenceImages\n. Sometimes the reference images need to be updated (if features change, or if the underlying backend changes).  VisualRegressionTests makes it somewhat painless to update the reference images:\n\n\nFrom the Julia REPL, run \ninclude(Pkg.dir(\"Plots\",\"test\",\"runtests.jl\"))\n.  This will try to plot the tests, and then compare the results to the stored reference images.  If the test output is sufficiently different than the reference output (using Tim Holy's excellent algorithm for the comparison), then a GTK window will pop up with a side-by-side comparison.  You can choose to replace the reference image, or not, depending on whether a real error was discovered.\n\n\nAfter the reference images have been updated, navigate to PlotReferenceImages and push the changes to Github:\n\n\ncd ~/.julia/v0.5/PlotReferenceImages\ngit add Plots/*\ngit commit -am \na useful message\n\ngit push\n\n\n\n\n\nIf there are mis-matches due to bugs, \ndon't update the reference image\n.\n\n\n\n\nTravis\n\n\nOn a \ngit push\n, Travis tests will be triggered.  This runs the same tests as above, downloading and comparing to the reference images, though with a larger tolerance for differences.  When Travis errors, it may be due to timeouts, stale reference images, or a host of other reasons.  Check the \nTravis logs\n to determine the reason.  If the tests are broken because of a new commit, consider rolling back.", 
+            "title": "Contributing"
+        }, 
+        {
+            "location": "/contributing/#the-juliaplots-organization", 
+            "text": "JuliaPlots  is the home for all things Plots.  It was founded by  Tom Breloff , and extended through many contributions from  members  and others.  The first step in contributing will be to understand which package(s) are appropriate destinations for your code.", 
+            "title": "The JuliaPlots Organization"
+        }, 
+        {
+            "location": "/contributing/#plots", 
+            "text": "This is the core package for:   Definitions of  plot / plot!  The  core processing pipeline  Base  recipes  for  path ,  scatter ,  bar , and many others  Generic  output  methods  Generic  layout  methods  Generic  animation  methods  Generic types: Plot, Subplot, Axis, Series, ...  Conveniences:  getindex / setindex ,  push! / append! ,  unzip ,  cycle , ...   This package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.", 
+            "title": "Plots"
+        }, 
+        {
+            "location": "/contributing/#backends", 
+            "text": "In Julia versions v0.5 and earlier, backend code (such as code linking Plots with GR) lived in the  Plots/src/backends  directory.  As such, backend code should be contributed to core Plots.  Starting with v0.6, the backend code will live in separate repos, and loaded on demand.  For example, the GR backend is being developed at  PlotsGR .  Users targeting v0.6 and later should contribute to the respective backend package \"Plots[backend].jl\".  Note: As of 2/22/17, the  reorg  branch of Plots is needed for compatibility with the new backend repos.  This will be merged into the master branch sometime after the release of v0.6.  This redesign will help with improved support for precompilation, and a cleaner separation of \"generic plotting\" development and \"backend-specific\" development.", 
+            "title": "Backends"
+        }, 
+        {
+            "location": "/contributing/#plotdocs", 
+            "text": "PlotDocs is the home of this documentation.  The documentation is built using the \"material\" theme in \"mkdocs\".  For those contributing documentation (to the  docs  directory of PlotDocs), it must be subsequently built and deployed using the following instructions:  # Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page\n\n# To build, run from inside the PlotDocs directory:\n#     mkdocs build --clean\n# (optional) Make the githubio remote point to JuliaPlots/juliaplots.github.io:\n#     git remote add githubio git@github.com:JuliaPlots/juliaplots.github.io.git\n# Add files, commit, then push:\n#     git push origin master\n# Push just the site directory to the master branch of githubio\n#     git subtree push --prefix site githubio master", 
+            "title": "PlotDocs"
+        }, 
+        {
+            "location": "/contributing/#recipesbase", 
+            "text": "Seldom updated, but essential.  This is the package that you would depend on to create third-party recipes.  It contains the bare minimum to define new recipes.", 
+            "title": "RecipesBase"
+        }, 
+        {
+            "location": "/contributing/#plotutils", 
+            "text": "Components that could be used for other (non-Plots) packages.  Anything that is sufficiently generic and useful could be contributed here.   Color (conversions, construction, conveniences)  Color gradients/maps  Tick computation", 
+            "title": "PlotUtils"
+        }, 
+        {
+            "location": "/contributing/#plotthemes", 
+            "text": "Visual themes (i.e. attribute defaults) such as \"dark\", \"orange\", etc.", 
+            "title": "PlotThemes"
+        }, 
+        {
+            "location": "/contributing/#statplots", 
+            "text": "An extension of Plots: Statistical plotting and tabular data.  Complex histograms and densities, correlation plots, and support for DataFrames.  Anything related to stats or special handling for table-like data should live here.", 
+            "title": "StatPlots"
+        }, 
+        {
+            "location": "/contributing/#plotrecipes", 
+            "text": "An extension of StatPlots: Graphs, maps, and more.  If it's not a \"base recipe\", and also not clearly \"statistical\" in nature, then this package might be a good home.", 
+            "title": "PlotRecipes"
+        }, 
+        {
+            "location": "/contributing/#mlplots", 
+            "text": "An extension of PlotRecipes, geared toward Machine Learning applications: neural nets, spike trains, ROC curves, and more.", 
+            "title": "MLPlots"
+        }, 
+        {
+            "location": "/contributing/#ggplots", 
+            "text": "A prototype API/interface for \"Grammar of Graphics\" style plotting.  This likely wouldn't add actual functionality, but would give users coming from R/ggplot2 a simple way to avoid Gadfly.  I (Tom) wrote the prototype to show how easy it is, but since I dislike GoG-style, I never finished it.  Completing this package would be a great self-contained project for interested parties.", 
+            "title": "GGPlots"
+        }, 
+        {
+            "location": "/contributing/#choosing-a-project", 
+            "text": "For people new to Plots, the first step should be to read (and reread) the documentation.  Code up some examples, play with the attributes, and try out multiple backends.  It's really hard to contribute to a project that you don't know how to use.", 
+            "title": "Choosing a Project"
+        }, 
+        {
+            "location": "/contributing/#beginner-project-ideas", 
+            "text": "Create a new recipe : Preferably something you care about.  Maybe you want custom overlays of heatmaps and scatters?  Maybe you have an input format that isn't currently supported?  Make a recipe for it so you can just  plot(thing) .  Fix bugs : There are many \"bugs\" which are specific to one backend, or incorrectly implement features that are infrequently used.  Some ideas can be found in the  issues marked easy .  Add recipes to external packages : By depending on RecipesBase, a package can define a recipe for their custom types.  Submit a PR to a package you care about that adds a recipe for that package.  For example, see  this PR to add OHLC plots for TimeSeries.jl .", 
+            "title": "Beginner Project Ideas"
+        }, 
+        {
+            "location": "/contributing/#intermediate-project-ideas", 
+            "text": "Improve your favorite backend : There are many missing features and other improvements that can be made to individual backends.  Most issues specific to a backend have a  special tag .  Help with documentation : This could come in the form of improved descriptions, additional examples, or full tutorials.  Please contribute improvements to  PlotDocs .  Help with the v0.6 reorganization : The  reorg  requires the annoying effort of creating new repos (PlotsPyPlot, PlotsPlotlyJS, etc) that hold the backend code.  I consider this intermediate because you need to know a little about Plots and git, but it's fairly straightforward to follow the model of PlotsGR.  Expand StatPlots functionality :  qqplot, DataStreams, or anything else you can think of.", 
+            "title": "Intermediate Project Ideas"
+        }, 
+        {
+            "location": "/contributing/#advanced-project-ideas", 
+            "text": "ColorBar redesign : Colorbars  need serious love ... this would likely require a new Colorbar type that links with the appropriate Series object(s) and is independent during subplot layout.  We want to allow many series (possibly from multiple subplots) to use the same clims and to share a colorbar, or have multiple colorbars that can be flexibly positioned.  PlotSpec redesign : This  long standing redesign proposal  could allow generic serialization/deserialization of Plot data and attributes, as well as some improvements/optimizations when mutating plots.  For example, we could lazily compute attribute values, and intelligently flag them as \"dirty\" when they change, allowing backends to skip much of the wasted processing and unnecessary rebuilding that currently occurs.  Improve graph recipes : Lots to do here: clean up visuals, improve edge drawing, implement  layout algorithms , and much more.", 
+            "title": "Advanced Project Ideas"
+        }, 
+        {
+            "location": "/contributing/#key-design-principles", 
+            "text": "Flexible and generic... these are the core principles underlying Plots development, and also tend to cause confusion when users laser-focus on their specific use case.  I (Tom) have painstakingly designed the core logic to support nearly any use case that exists or may exist.  I don't pretend to know how you want to use Plots, or what type of data you might pass in, or what sort of recipe you may want to apply.  As such, I try to avoid unnecessary restriction of types, or forced conversions, or many other pitfalls of limited visualization frameworks.  The result is a highly modular framework which is limited by your imagination.  When contributing new features to Plots (or the surrounding ecosystem), you should strive for this mentality as well.  New features should be left as generic as possible, while avoiding obvious feature clash.  As an example, you may want a new recipe that shows a histogram when passed Float64 numbers, but shows counts of every unique value for strings.  So you make a recipe that works perfectly for your purpose:  using   Plots ,   StatsBase  gr ( size = ( 300 , 300 ),   leg = false )  @userplot   MyCount  @recipe   function   f ( mc :: MyCount ) \n     # get the array from the args field \n     arr   =   mc . args [ 1 ] \n\n     T   =   typeof ( arr ) \n     if   T . parameters [ 1 ]   ==   Float64 \n         seriestype   :=   : histogram \n         arr \n     else \n         seriestype   :=   : bar \n         cm   =   countmap ( arr ) \n         x   =   sort! ( collect ( keys ( cm ))) \n         y   =   [ cm [ xi ]   for   xi = x ] \n         x ,   y \n     end  end   The recipe defined above is a \"user recipe\", which builds a histogram for arrays of Float64, and otherwise shows a \"countmap\" of sorted unique values and their observed counts.  You only care about Float64 and String, and so you're results are fine:  mycount ( rand ( 500 ))    mycount ( rand ([ A , B , C ], 100 ))    But you didn't consider the person that, in the future, might want to pass integers to this recipe:  mycount ( rand ( 1 : 500 ,   500 ))    This user expected integers to be treated as numbers and output a histogram, but instead they were treated like strings.  A simple solution would have been to replace  if T.parameters[1] == Float64  with  if T.parameters[1]  : Number .  However, should we even depend on  T  having it's first parameter be the element type? (No)  So even better would be  if eltype(arr)  : Number , which now allows any container with any numeric type to trigger the \"histogram\" logic.  This simple example outlines a common theme when developing Plots (or really any other Julia package).  Try to create the most generic implementation you can think of while maintaining correctness.  You don't know what crazy types someone else will use to try to access your functionality.", 
+            "title": "Key Design Principles"
+        }, 
+        {
+            "location": "/contributing/#code-organization", 
+            "text": "Generally speaking, similar functionality is kept within the same file.  Within the  src  directory, much of the files should be self explanatory (for example, you'll find animation methods/macros in the  animation.jl  file), but some could use a summary of contents:   Plots.jl : imports, exports, shorthands, and initialization  args.jl : defaults, aliases, and attribute processing  components.jl : shapes, fonts, and other assorted goodies  pipeline.jl : code which builds the plots and subplots through recursive application of recipes  recipes.jl : primarily core series recipes  series.jl : core input data handling and processing  utils.jl : lots of functionality that didn't have a home...  getindex / setindex!  for  Plot / Subplot / Axis / Series ,  push! / append!  for adding data to a series,  cycle / unzip  and similar utility functions,  Segments / SegmentsIterator , etc.   These files should probably be reorganized, but until then...", 
+            "title": "Code Organization"
+        }, 
+        {
+            "location": "/contributing/#creating-new-backends", 
+            "text": "Model new backends on  PlotsGR .  Implement the callbacks that are appropriate, especially  _display  and  _show  for GUI and image output respectively.", 
+            "title": "Creating new backends"
+        }, 
+        {
+            "location": "/contributing/#styledesign-guidelines", 
+            "text": "Make every effort to minimize external dependencies and exports.  Requiring new dependencies is the most likely way to make your PR \"unmergeable\".  Be careful adding method signatures on existing methods with Base types (Array, etc) as you may override key functionality.  This is especially true with recipes.  Consider wrapping inputs in a new type (like in \"user recipes\").  Terse code is ok, as is verbose code.  What's important is understanding and context.  Will someone reading your code know what you mean?  If not, consider writing comments to describe your reason for the design, or describe the hack you just implemented in clear prose.  Sometimes  it's ok that your comments are longer than your code .  Pick your project for yourself, but write code for others.  It should be generic and useful beyond your needs, and you should  never break functionality  because you can't figure out how to implement something well.  Spend more time on it... there's always a better way.", 
+            "title": "Style/Design Guidelines"
+        }, 
+        {
+            "location": "/contributing/#git-fu-or-the-mechanics-of-contributing", 
+            "text": "Many people have trouble with Git.  More have trouble with Github.  I think much of the confusion happens when you run commands without understanding what they do.  We're all guilty of it, but recovering usually means \"starting over\".  In this section, I'll try to keep a simple, practical approach to making PRs.  It's worked well for me, though YMMV.", 
+            "title": "Git-fu (or... the mechanics of contributing)"
+        }, 
+        {
+            "location": "/contributing/#guidelines", 
+            "text": "Here are some guidelines for the development workflow (Note: Even if you've made 20 PRs to Plots in the past, please read this as it may be different than past guidelines):   Commit to a branch that belongs to you.   Typically that means you should give your branches names that are unique to you, and that might include information on the feature you're developing.  For example, I might choose to  git checkout -b tb-fonts  when starting work on fonts.  Open a PR against master.    master  is the \"bleeding edge\".  (Note: I used to recommend PRing to  dev )  Only merge others changes when absolutely necessary.  You should prefer to use  git rebase origin/master  instead of  git merge origin/master .  A rebase replays your recent commits on top of the most recent  master , avoiding complicated and messy merge commits and generally avoiding confusion.  If you follow the first rule, then you likely won't get yourself in trouble.  Rebase horror stories generally result when many people are working on the same branch.  I find  this resource  is great for understanding the important parts of  git rebase .", 
+            "title": "Guidelines"
+        }, 
+        {
+            "location": "/contributing/#development-workflow", 
+            "text": "My suggestions for a smooth development workflow:", 
+            "title": "Development Workflow"
+        }, 
+        {
+            "location": "/contributing/#fork-the-repo", 
+            "text": "Navigate to the repo site (https://github.com/JuliaPlots/Plots.jl) and click the \"Fork\" button.  You might get a choice of which account or organization to place the fork.  I'll assume going forward that you forked to Github username  user123 .", 
+            "title": "Fork the repo"
+        }, 
+        {
+            "location": "/contributing/#set-up-the-git-remote", 
+            "text": "Navigate to the local repo.  Note: I'm assuming that you do development in your Julia directory, and using Mac/Linux.  Adjust as needed.  cd ~/.julia/v0.5/Plots\ngit remote add forked git@github.com:user123/Plots.jl.git  After running these commands,  git remote -v  should show two remotes:  origin  (the main repo) and  forked  (your fork).  A remote is simply a reference/pointer to the github site hosting the repo, and a fork is simply any other git repo with a special link to the originating repo.", 
+            "title": "Set up the git remote"
+        }, 
+        {
+            "location": "/contributing/#create-a-new-branch", 
+            "text": "If you're just starting work on a new feature:  git fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit checkout -b user123-myfeature\ngit push -u forked user123-myfeature  The first three lines are meant to ensure you start from the main repo's master branch.  The  --ff-only  flag ensures you will only \"fast forward\" to newer commits, and avoids creating a new merge commit when you didn't mean to.  The  git checkout  line both creates a new branch (the  -b ) pointing to the current commit and makes that branch current.  The  git push  line adds this branch to your Github fork, and sets up the local branch to \"track\" ( -u ) the remote branch for subsequent  git push  and  git pull  calls.", 
+            "title": "Create a new branch"
+        }, 
+        {
+            "location": "/contributing/#or-reuse-an-old-branch", 
+            "text": "If you have an ongoing development branch (say,  user123-dev ) which you'd prefer to use (and which has previously been merged into master!) then you can get that up to date with:  git fetch origin\ngit checkout user123-dev\ngit merge --ff-only origin/master\ngit push forked user123-dev  We update our local copy of origin, checkout the dev branch, then attempt to \"fast-forward\" to the current master.  If successful, we push the branch back to our forked repo.", 
+            "title": "or... Reuse an old branch"
+        }, 
+        {
+            "location": "/contributing/#write-code-and-commit", 
+            "text": "After powering up your favorite editor (maybe  Juno ?) and making some code changes to the repo, you'll want to \"commit\" or save a snapshot of all the changes you made.  After committing, you can \"push\" those changes to your forked repo on Github:  git add src/my_new_file.jl\ngit commit -am  my commit message \ngit push forked user123-dev  The first line is optional, and is used when adding new files to the repo.  The  -a  means \"commit all my changes\", and the  -m  lets you write a note about the commit (you should always do this, and hopefully make it descriptive).", 
+            "title": "Write code and commit"
+        }, 
+        {
+            "location": "/contributing/#submit-a-pr", 
+            "text": "You're almost there!  Browse to your fork (https://github.com/user123/Plots.jl).  Most likely there will be a section just above the code that asks if you'd like to create a PR from the  user123-dev  branch.  If not, you can click the \"New pull request\" button.  Make sure the \"base\" branch is JuliaPlots  master  and the \"compare\" branch is  user123-dev .  Add an informative title and description, and link to relevant issues or discussions, then click \"Create pull request\".  You may get some questions about it, and possibly suggestions of how to fix it to be \"merge-ready\".  Then hopefully it gets merged... thanks for the contribution!!", 
+            "title": "Submit a PR"
+        }, 
+        {
+            "location": "/contributing/#cleanup", 
+            "text": "After all of this, you will likely want to go back to using  master  (or possibly using a tagged release, once your feature is tagged).  To clean up:  git fetch origin\ngit checkout master\ngit merge --ff-only origin/master\ngit branch -d user123-dev  This catches your local master branch up to the remote master branch, then deletes the dev branch.  If you want to return to tagged releases, run  Pkg.free(\"Plots\")  from the Julia REPL.", 
+            "title": "Cleanup"
+        }, 
+        {
+            "location": "/contributing/#tags", 
+            "text": "New tags should represent \"stable releases\"... those that you are happy to distribute to end-users.  Effort should be made to ensure tests pass before creating a new tag, and ideally new tests would be added which test your new functionality.  This is, of course, a much trickier problem for visualization libraries as compared to other software.  See the  testing section  below.  Only JuliaPlots members may create a new tag.  To create a new tag, we'll create a new release on Github and use  attobot  to generate the PR to METADATA.  Create a new release at https://github.com/JuliaPlots/Plots.jl/releases/new (of course replacing the repo name with the package you're tagging).  The version number (vMAJOR.MINOR.PATCH) should be incremented using  semver , which generally means that breaking changes should increment the major number, backwards compatible changes should increment the minor number, and bug fixes should increment the patch number.  For \"v0.x.y\" versions, this requirement is relaxed.  The minor version can be incremented for breaking changes.", 
+            "title": "Tags"
+        }, 
+        {
+            "location": "/contributing/#testing", 
+            "text": "", 
+            "title": "Testing"
+        }, 
+        {
+            "location": "/contributing/#visualregressiontests", 
+            "text": "Testing in Plots is done with the help of  VisualRegressionTests .  Reference images are stored in  PlotReferenceImages . Sometimes the reference images need to be updated (if features change, or if the underlying backend changes).  VisualRegressionTests makes it somewhat painless to update the reference images:  From the Julia REPL, run  include(Pkg.dir(\"Plots\",\"test\",\"runtests.jl\")) .  This will try to plot the tests, and then compare the results to the stored reference images.  If the test output is sufficiently different than the reference output (using Tim Holy's excellent algorithm for the comparison), then a GTK window will pop up with a side-by-side comparison.  You can choose to replace the reference image, or not, depending on whether a real error was discovered.  After the reference images have been updated, navigate to PlotReferenceImages and push the changes to Github:  cd ~/.julia/v0.5/PlotReferenceImages\ngit add Plots/*\ngit commit -am  a useful message \ngit push  If there are mis-matches due to bugs,  don't update the reference image .", 
+            "title": "VisualRegressionTests"
+        }, 
+        {
+            "location": "/contributing/#travis", 
+            "text": "On a  git push , Travis tests will be triggered.  This runs the same tests as above, downloading and comparing to the reference images, though with a larger tolerance for differences.  When Travis errors, it may be due to timeouts, stale reference images, or a host of other reasons.  Check the  Travis logs  to determine the reason.  If the tests are broken because of a new commit, consider rolling back.", 
+            "title": "Travis"
+        }, 
+        {
+            "location": "/ecosystem/", 
+            "text": "Plots is great on its own, but the real power comes from the ecosystem surrounding it.  The design of Plots (and more specifically \nRecipesBase\n) is to bind together disparate functionality into a cohesive and consistent user experience.  Some packages may choose to implement recipes to visualize their custom types.  Others may extend the functionality of Plots for Base types.  On this page I'll attempt to collect and display some of the many things you can do using the ecosystem which has developed around the Plots core.\n\n\n\n\n\n\nJuliaPlots\n\n\nThe \nJuliaPlots\n organization builds and maintains much of the most commonly used functionality external to core Plots, as well as RecipesBase, PlotUtils, the documentation, and more.\n\n\n\n\nStatPlots\n\n\nMuch of this functionality once existed in core Plots, but has been moved out to facilitate a clean separation between those features that are truly \"core\" and those which are specific to certain types of workflows and disciplines.  \n\n\n\n\n\n\nTypes:\n\n\n\n\nDataFrames\n\n\nDistributions\n\n\n\n\nRecipes:\n\n\n\n\n\n\nhistogram/histogram2d\n\n\n\n\nboxplot\n\n\nviolin\n\n\nmarginalhist\n\n\ncorrplot/cornerplot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotRecipes\n\n\nA catch-all for functionality and recipes which don't have a home elsewhere.  Graphs (networks of nodes and edges), maps/shapes, finance, and more.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommunity packages\n\n\n\n\nAtariAlgos\n\n\nAtariAlgos wraps the ArcadeLearningEnvironment as an implementation of an AbstractEnvironment from the Reinforce interface. This allows it to be used as a plug-and-play module with general reinforcement learning agents.\n\n\nGames can also be \"plotted\" using Plots.jl, allowing it to be a component of more complex visualizations for tracking learning progress and more, as well as making it easy to create animations.\n\n\n\n\n\n\nReinforce\n\n\nReinforce.jl is an interface for Reinforcement Learning. It is intended to connect modular environments, policies, and solvers with a simple interface.\n\n\n\n\n\n\nJuliaML\n\n\nTools, models, and math related to machine learning in Julia.\n\n\n\n\n\n\nAugmentor\n\n\nAugmentor is an image-augmentation library designed to render the process of artificial dataset enlargement more convenient, less error prone, and easier to reproduce. This is achieved using probabilistic transformation pipelines.\n\n\n\n\n\n\nDifferentialEquations\n\n\nDifferentialEquations.jl is a package for solving numerically solving differential equations in Julia by Chris Rackauckas. The purpose of this package is to supply efficient Julia implementations of solvers for various differential equations. Equations within the realm of this package include ordinary differential equations (ODEs), stochastic ordinary differential equations (SODEs or SDEs), stochastic partial differential equations (SPDEs), partial differential equations (with both finite difference and finite element methods), differential algebraic equations, and differential delay equations. It includes well-optimized implementations classic algorithms and ones from recent research, including algorithms optimized for high-precision and HPC applications.\n\n\nAll of the solvers return solution objects which are set up with plot recipes to give informative default plots.\n\n\n\n\n\n\nPhyloTrees\n\n\nThe PhyloTrees.jl package provides a type representation of phylogenetic trees. Simulation, inference, and visualization functionality is also provided for phylogenetic trees. A plot recipe allows the structure of phylogenetic trees to be drawn by whichever plotting backend is preferred by the user.\n\n\n\n\n\n\nEEG\n\n\nProcess EEG files and visualize brain activity.\n\n\n\n\n\n\n\n\nImplicitEquations\n\n\nIn a paper, Tupper presents a method for graphing two-dimensional implicit equations and inequalities. This package gives an implementation of the paper's basic algorithms to allow the Julia user to naturally represent and easily render graphs of implicit functions and equations.\n\n\n\n\n\n\nControlSystems\n\n\nA control systems design toolbox for Julia.  This toolbox works similar to that of other major computer-aided control systems design (CACSD) toolboxes. Systems can be created in either a transfer function or a state space representation. These systems can then be combined into larger architectures, simulated in both time and frequency domain, and analyzed for stability/performance properties.\n\n\n\n\n\n\nValueHistories\n\n\nUtility package for efficient tracking of optimization histories, training curves or other information of arbitrary types and at arbitrarily spaced sampling times\n\n\n\n\n\n\nApproxFun\n\n\nApproxFun is a package for approximating functions. It is heavily influenced by the Matlab package Chebfun and the Mathematica package RHPackage.\n\n\n\n\n\n\nAverageShiftedHistograms\n\n\nDensity estimation using Average Shifted Histograms.\n\n\n\n\n\n\nMLPlots\n\n\nCommon plotting recipes for statistics and machine learning.\n\n\n\n\n\n\n\n\nLazySets\n\n\nLazySets.jl is a Julia package for calculus with convex sets. The principle behind LazySets is to wrap set computations into specialized types, delaying the evaluation of the result of an expression until it is necessary. Combining lazy operations in high dimensions and explicit computations in low dimensions, the library can be applied to solve complex, high-dimensional problems.\n\n\nReachability plot of a \ntwo-mode hybrid system\n:\n\n\n\n\n\n\nTODO:\n\n\n\n\nLosses\n\n\n\n\nIterativeSolvers\n\n\n\n\nSymPy\n\n\n\n\nOnlineStats\n\n\n\n\nRobotlib\n\n\n\n\nJWAS\n\n\n\n\nQuantEcon\n\n\n\n\nReinforce\n\n\n\n\nOptim\n\n\n\n\nTransformations / Flow", 
+            "title": "Ecosystem"
+        }, 
+        {
+            "location": "/ecosystem/#juliaplots", 
+            "text": "The  JuliaPlots  organization builds and maintains much of the most commonly used functionality external to core Plots, as well as RecipesBase, PlotUtils, the documentation, and more.", 
+            "title": "JuliaPlots"
+        }, 
+        {
+            "location": "/ecosystem/#statplots", 
+            "text": "Much of this functionality once existed in core Plots, but has been moved out to facilitate a clean separation between those features that are truly \"core\" and those which are specific to certain types of workflows and disciplines.      Types:   DataFrames  Distributions   Recipes:    histogram/histogram2d   boxplot  violin  marginalhist  corrplot/cornerplot", 
+            "title": "StatPlots"
+        }, 
+        {
+            "location": "/ecosystem/#plotrecipes", 
+            "text": "A catch-all for functionality and recipes which don't have a home elsewhere.  Graphs (networks of nodes and edges), maps/shapes, finance, and more.", 
+            "title": "PlotRecipes"
+        }, 
+        {
+            "location": "/ecosystem/#community-packages", 
+            "text": "", 
+            "title": "Community packages"
+        }, 
+        {
+            "location": "/ecosystem/#atarialgos", 
+            "text": "AtariAlgos wraps the ArcadeLearningEnvironment as an implementation of an AbstractEnvironment from the Reinforce interface. This allows it to be used as a plug-and-play module with general reinforcement learning agents.  Games can also be \"plotted\" using Plots.jl, allowing it to be a component of more complex visualizations for tracking learning progress and more, as well as making it easy to create animations.", 
+            "title": "AtariAlgos"
+        }, 
+        {
+            "location": "/ecosystem/#reinforce", 
+            "text": "Reinforce.jl is an interface for Reinforcement Learning. It is intended to connect modular environments, policies, and solvers with a simple interface.", 
+            "title": "Reinforce"
+        }, 
+        {
+            "location": "/ecosystem/#juliaml", 
+            "text": "Tools, models, and math related to machine learning in Julia.", 
+            "title": "JuliaML"
+        }, 
+        {
+            "location": "/ecosystem/#augmentor", 
+            "text": "Augmentor is an image-augmentation library designed to render the process of artificial dataset enlargement more convenient, less error prone, and easier to reproduce. This is achieved using probabilistic transformation pipelines.", 
+            "title": "Augmentor"
+        }, 
+        {
+            "location": "/ecosystem/#differentialequations", 
+            "text": "DifferentialEquations.jl is a package for solving numerically solving differential equations in Julia by Chris Rackauckas. The purpose of this package is to supply efficient Julia implementations of solvers for various differential equations. Equations within the realm of this package include ordinary differential equations (ODEs), stochastic ordinary differential equations (SODEs or SDEs), stochastic partial differential equations (SPDEs), partial differential equations (with both finite difference and finite element methods), differential algebraic equations, and differential delay equations. It includes well-optimized implementations classic algorithms and ones from recent research, including algorithms optimized for high-precision and HPC applications.  All of the solvers return solution objects which are set up with plot recipes to give informative default plots.", 
+            "title": "DifferentialEquations"
+        }, 
+        {
+            "location": "/ecosystem/#phylotrees", 
+            "text": "The PhyloTrees.jl package provides a type representation of phylogenetic trees. Simulation, inference, and visualization functionality is also provided for phylogenetic trees. A plot recipe allows the structure of phylogenetic trees to be drawn by whichever plotting backend is preferred by the user.", 
+            "title": "PhyloTrees"
+        }, 
+        {
+            "location": "/ecosystem/#eeg", 
+            "text": "Process EEG files and visualize brain activity.", 
+            "title": "EEG"
+        }, 
+        {
+            "location": "/ecosystem/#implicitequations", 
+            "text": "In a paper, Tupper presents a method for graphing two-dimensional implicit equations and inequalities. This package gives an implementation of the paper's basic algorithms to allow the Julia user to naturally represent and easily render graphs of implicit functions and equations.", 
+            "title": "ImplicitEquations"
+        }, 
+        {
+            "location": "/ecosystem/#controlsystems", 
+            "text": "A control systems design toolbox for Julia.  This toolbox works similar to that of other major computer-aided control systems design (CACSD) toolboxes. Systems can be created in either a transfer function or a state space representation. These systems can then be combined into larger architectures, simulated in both time and frequency domain, and analyzed for stability/performance properties.", 
+            "title": "ControlSystems"
+        }, 
+        {
+            "location": "/ecosystem/#valuehistories", 
+            "text": "Utility package for efficient tracking of optimization histories, training curves or other information of arbitrary types and at arbitrarily spaced sampling times", 
+            "title": "ValueHistories"
+        }, 
+        {
+            "location": "/ecosystem/#approxfun", 
+            "text": "ApproxFun is a package for approximating functions. It is heavily influenced by the Matlab package Chebfun and the Mathematica package RHPackage.", 
+            "title": "ApproxFun"
+        }, 
+        {
+            "location": "/ecosystem/#averageshiftedhistograms", 
+            "text": "Density estimation using Average Shifted Histograms.", 
+            "title": "AverageShiftedHistograms"
+        }, 
+        {
+            "location": "/ecosystem/#mlplots", 
+            "text": "Common plotting recipes for statistics and machine learning.", 
+            "title": "MLPlots"
+        }, 
+        {
+            "location": "/ecosystem/#lazysets", 
+            "text": "LazySets.jl is a Julia package for calculus with convex sets. The principle behind LazySets is to wrap set computations into specialized types, delaying the evaluation of the result of an expression until it is necessary. Combining lazy operations in high dimensions and explicit computations in low dimensions, the library can be applied to solve complex, high-dimensional problems.  Reachability plot of a  two-mode hybrid system :    TODO:", 
+            "title": "LazySets"
+        }, 
+        {
+            "location": "/ecosystem/#losses", 
+            "text": "", 
+            "title": "Losses"
+        }, 
+        {
+            "location": "/ecosystem/#iterativesolvers", 
+            "text": "", 
+            "title": "IterativeSolvers"
+        }, 
+        {
+            "location": "/ecosystem/#sympy", 
+            "text": "", 
+            "title": "SymPy"
+        }, 
+        {
+            "location": "/ecosystem/#onlinestats", 
+            "text": "", 
+            "title": "OnlineStats"
+        }, 
+        {
+            "location": "/ecosystem/#robotlib", 
+            "text": "", 
+            "title": "Robotlib"
+        }, 
+        {
+            "location": "/ecosystem/#jwas", 
+            "text": "", 
+            "title": "JWAS"
+        }, 
+        {
+            "location": "/ecosystem/#quantecon", 
+            "text": "", 
+            "title": "QuantEcon"
+        }, 
+        {
+            "location": "/ecosystem/#reinforce_1", 
+            "text": "", 
+            "title": "Reinforce"
+        }, 
+        {
+            "location": "/ecosystem/#optim", 
+            "text": "", 
+            "title": "Optim"
+        }, 
+        {
+            "location": "/ecosystem/#transformations-flow", 
+            "text": "", 
+            "title": "Transformations / Flow"
         }, 
         {
             "location": "/pipeline/", 

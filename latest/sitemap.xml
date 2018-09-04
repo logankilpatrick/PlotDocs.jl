@@ -6,21 +6,6 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/learning/</loc>
-     <lastmod>2018-09-04</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/contributing/</loc>
-     <lastmod>2018-09-04</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/ecosystem/</loc>
-     <lastmod>2018-09-04</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>/install/</loc>
      <lastmod>2018-09-04</lastmod>
      <changefreq>daily</changefreq>
@@ -77,6 +62,21 @@
     </url>
     <url>
      <loc>/supported/</loc>
+     <lastmod>2018-09-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>/learning/</loc>
+     <lastmod>2018-09-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>/contributing/</loc>
+     <lastmod>2018-09-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>/ecosystem/</loc>
      <lastmod>2018-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
