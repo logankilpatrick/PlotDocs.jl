@@ -581,8 +581,8 @@
 
 
   <li class="md-nav__item">
-    <a href="examples/pyplot/" title="PyPlot" class="md-nav__link">
-      PyPlot
+    <a href="examples/gr/" title="GR" class="md-nav__link">
+      GR
     </a>
   </li>
 
@@ -593,8 +593,8 @@
 
 
   <li class="md-nav__item">
-    <a href="examples/gr/" title="GR" class="md-nav__link">
-      GR
+    <a href="examples/pyplot/" title="PyPlot" class="md-nav__link">
+      PyPlot
     </a>
   </li>
 
@@ -714,9 +714,9 @@
                 <p><a id='Plots-powerful-convenience-for-visualization-in-Julia-1'></a></p>
 <h1 id="plots-powerful-convenience-for-visualization-in-julia">Plots - powerful convenience for visualization in Julia</h1>
 <p><strong>Author: Thomas Breloff (@tbreloff)</strong></p>
-<p>To get started, <a href="./tutorial">see the tutorial</a>.</p>
-<p>Almost everything in Plots is done by specifying plot <a href="./attributes">attributes</a>.</p>
-<p>Tap into the extensive visualization functionality enabled by the <a href="./ecosystem">Plots ecosystem</a>, and easily build your own complex graphics components with <a href="./recipes">recipes</a>.</p>
+<p>To get started, <a href="tutorial/#tutorial-1">see the tutorial</a>.</p>
+<p>Almost everything in Plots is done by specifying plot <a href="attributes/#attributes-1">attributes</a>.</p>
+<p>Tap into the extensive visualization functionality enabled by the <a href="ecosystem/#ecosystem-1">Plots ecosystem</a>, and easily build your own complex graphics components with <a href="recipes/#recipes-1">recipes</a>.</p>
 <p><a id='Intro-to-Plots-in-Julia-1'></a></p>
 <h2 id="intro-to-plots-in-julia">Intro to Plots in Julia</h2>
 <p>Data visualization has a complicated history.  Plotting software makes trade-offs between features and simplicity, speed and beauty, and a static and dynamic interface. Some packages make a display and never change it, while others make updates in real-time.</p>
@@ -727,17 +727,17 @@
 <li><strong>Intuitive</strong>.  Start generating plots without reading volumes of documentation. Commands should "just work."</li>
 <li><strong>Concise</strong>.  Less code means fewer mistakes and more efficient development and analysis.</li>
 <li><strong>Flexible</strong>.  Produce your favorite plots from your favorite package, only quicker and simpler.</li>
-<li><strong>Consistent</strong>.  Don't commit to one graphics package. Use the same code and access the strengths of all <a href="./backends">backends</a>.</li>
+<li><strong>Consistent</strong>.  Don't commit to one graphics package. Use the same code and access the strengths of all <a href="backends/#backends-1">backends</a>.</li>
 <li><strong>Lightweight</strong>.  Very few dependencies, since backends are loaded and initialized dynamically.</li>
 <li><strong>Smart</strong>.  It's not quite AGI, but Plots should figure out what you <strong>want</strong> it to do... not just what you <strong>tell</strong> it.</li>
 </ul>
-<p>Use the <a href="./pipeline">preprocessing pipeline</a> in Plots to describe your visualization completely before it calls the backend code.  This preprocessing maintains modularity and allows for efficient separation of front end code, algorithms, and backend graphics.</p>
+<p>Use the <a href="pipeline/#pipeline-1">preprocessing pipeline</a> in Plots to describe your visualization completely before it calls the backend code.  This preprocessing maintains modularity and allows for efficient separation of front end code, algorithms, and backend graphics.</p>
 <p>Please add wishlist items, bugs, or any other comments/questions to the <a href="https://github.com/tbreloff/Plots.jl/issues">issues list</a>, and <a href="https://gitter.im/tbreloff/Plots.jl">join the conversation on gitter</a>.</p>
 <hr />
 <p><a id='Simple-is-Beautiful-1'></a></p>
 <h3 id="simple-is-beautiful">Simple is Beautiful</h3>
 <p>Lorenz Attractor</p>
-<div class="code"><pre><span></span><span class="c"># define the Lorenz attractor</span>
+<div class="codehilite"><pre><span></span><span class="c"># define the Lorenz attractor</span>
 <span class="n">mutable</span> <span class="n">struct</span> <span class="n">Lorenz</span>
     <span class="n">dt</span><span class="p">;</span> <span class="n">σ</span><span class="p">;</span> <span class="n">ρ</span><span class="p">;</span> <span class="n">β</span><span class="p">;</span> <span class="n">x</span><span class="p">;</span> <span class="n">y</span><span class="p">;</span> <span class="n">z</span>
 <span class="k">end</span>
@@ -763,9 +763,9 @@
 </pre></div>
 
 
-<p><img alt="" src="./examples/img/lorenz.gif" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/lorenz_attractor.gif" /></p>
 <p>Make some waves</p>
-<div class="code"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">ProgressMeter</span>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">ProgressMeter</span>
 <span class="n">pyplot</span><span class="p">(</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span> <span class="c">#change to the pyplot backend and define some defaults</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">zs</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
@@ -800,9 +800,9 @@
 </pre></div>
 
 
-<p><img alt="waves" src="./examples/img/waves.gif" /></p>
+<p><img alt="waves" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/waves.gif" /></p>
 <p>Iris Dataset</p>
-<div class="code"><pre><span></span><span class="c"># load a dataset</span>
+<div class="codehilite"><pre><span></span><span class="c"># load a dataset</span>
 <span class="k">using</span> <span class="n">RDatasets</span>
 <span class="n">iris</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;iris&quot;</span><span class="p">);</span>
 
@@ -822,7 +822,7 @@
 </pre></div>
 
 
-<p><img alt="iris_plt" src="./examples/img/iris.png" /></p>
+<p><img alt="iris_plt" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/iris.png" /></p>
 <hr />
                 
                   

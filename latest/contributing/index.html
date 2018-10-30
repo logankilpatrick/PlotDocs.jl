@@ -824,8 +824,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
-      PyPlot
+    <a href="../examples/gr/" title="GR" class="md-nav__link">
+      GR
     </a>
   </li>
 
@@ -836,8 +836,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/gr/" title="GR" class="md-nav__link">
-      GR
+    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
+      PyPlot
     </a>
   </li>
 
@@ -1220,11 +1220,11 @@
 <p>This is the core package for:</p>
 <ul>
 <li>Definitions of <code>plot</code>/<code>plot!</code></li>
-<li>The <a href="../pipeline">core processing pipeline</a></li>
-<li>Base <a href="../recipes">recipes</a> for <code>path</code>, <code>scatter</code>, <code>bar</code>, and many others</li>
-<li>Generic <a href="../output">output</a> methods</li>
-<li>Generic <a href="../layouts">layout</a> methods</li>
-<li>Generic <a href="../animations">animation</a> methods</li>
+<li>The <a href="../pipeline/#pipeline-1">core processing pipeline</a></li>
+<li>Base <a href="../recipes/#recipes-1">recipes</a> for <code>path</code>, <code>scatter</code>, <code>bar</code>, and many others</li>
+<li>Generic <a href="../output/#output-1">output</a> methods</li>
+<li>Generic <a href="../layouts/#layouts-1">layout</a> methods</li>
+<li>Generic <a href="../animations/#animations-1">animation</a> methods</li>
 <li>Generic types: Plot, Subplot, Axis, Series, ...</li>
 <li>Conveniences: <code>getindex</code>/<code>setindex</code>, <code>push!</code>/<code>append!</code>, <code>unzip</code>, <code>cycle</code>, ...</li>
 </ul>
@@ -1238,7 +1238,7 @@
 <p><a id='PlotDocs-1'></a></p>
 <h3 id="plotdocs">PlotDocs</h3>
 <p>PlotDocs is the home of this documentation.  The documentation is built using the "material" theme in "mkdocs".  For those contributing documentation (to the <code>docs</code> directory of PlotDocs), it must be subsequently built and deployed using the following instructions:</p>
-<div class="code"><pre><span></span># Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page
+<div class="codehilite"><pre><span></span># Note: the site is built inside the PlotDocs.jl repo, but then deployed to the JuliaPlots organization page
 
 # To build, run from inside the PlotDocs directory:
 #     mkdocs build --clean
@@ -1310,7 +1310,7 @@
 <p>I (Tom) have painstakingly designed the core logic to support nearly any use case that exists or may exist.  I don't pretend to know how you want to use Plots, or what type of data you might pass in, or what sort of recipe you may want to apply.  As such, I try to avoid unnecessary restriction of types, or forced conversions, or many other pitfalls of limited visualization frameworks.  The result is a highly modular framework which is limited by your imagination.</p>
 <p>When contributing new features to Plots (or the surrounding ecosystem), you should strive for this mentality as well.  New features should be left as generic as possible, while avoiding obvious feature clash.</p>
 <p>As an example, you may want a new recipe that shows a histogram when passed Float64 numbers, but shows counts of every unique value for strings.  So you make a recipe that works perfectly for your purpose:</p>
-<div class="code"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">StatsBase</span>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">StatsBase</span>
 <span class="n">gr</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
 
 <span class="nd">@userplot</span> <span class="n">MyCount</span>
@@ -1334,22 +1334,22 @@
 
 
 <p>The recipe defined above is a "user recipe", which builds a histogram for arrays of Float64, and otherwise shows a "countmap" of sorted unique values and their observed counts.  You only care about Float64 and String, and so you're results are fine:</p>
-<div class="code"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
 </pre></div>
 
 
-<p><img alt="" src="https://cloud.githubusercontent.com/assets/933338/23183178/24e38dcc-f849-11e6-9fb5-e6ad722b433f.png" /></p>
-<div class="code"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">([</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="s">&quot;C&quot;</span><span class="p">],</span><span class="mi">100</span><span class="p">))</span>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/contributing/my_count_1.png" /></p>
+<div class="codehilite"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">([</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="s">&quot;C&quot;</span><span class="p">],</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 
 
-<p><img alt="" src="https://cloud.githubusercontent.com/assets/933338/23183192/2ef6fd26-f849-11e6-9114-ea4d24b16bcb.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/contributing/my_count_2.png" /></p>
 <p>But you didn't consider the person that, in the future, might want to pass integers to this recipe:</p>
-<div class="code"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">mycount</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
 </pre></div>
 
 
-<p><img alt="" src="https://cloud.githubusercontent.com/assets/933338/23183201/3a04e6f6-f849-11e6-8808-5d7f78e6aeb7.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/contributing/my_count_3.png" /></p>
 <p>This user expected integers to be treated as numbers and output a histogram, but instead they were treated like strings.  A simple solution would have been to replace <code>if T.parameters[1] == Float64</code> with <code>if T.parameters[1] &lt;: Number</code>.  However, should we even depend on <code>T</code> having it's first parameter be the element type? (No)  So even better would be <code>if eltype(arr) &lt;: Number</code>, which now allows any container with any numeric type to trigger the "histogram" logic.</p>
 <p>This simple example outlines a common theme when developing Plots (or really any other Julia package).  Try to create the most generic implementation you can think of while maintaining correctness.  You don't know what crazy types someone else will use to try to access your functionality.</p>
 <hr />
@@ -1399,7 +1399,7 @@
 <p><a id='Set-up-the-git-remote-1'></a></p>
 <h4 id="set-up-the-git-remote">Set up the git remote</h4>
 <p>Navigate to the local repo.  Note: I'm assuming that you do development in your Julia directory, and using Mac/Linux.  Adjust as needed.</p>
-<div class="code"><pre><span></span>cd ~/.julia/v0.5/Plots
+<div class="codehilite"><pre><span></span>cd ~/.julia/v0.5/Plots
 git remote add forked git@github.com:user123/Plots.jl.git
 </pre></div>
 
@@ -1408,7 +1408,7 @@ git remote add forked git@github.com:user123/Plots.jl.git
 <p><a id='Create-a-new-branch-1'></a></p>
 <h4 id="create-a-new-branch">Create a new branch</h4>
 <p>If you're just starting work on a new feature:</p>
-<div class="code"><pre><span></span>git fetch origin
+<div class="codehilite"><pre><span></span>git fetch origin
 git checkout master
 git merge --ff-only origin/master
 git checkout -b user123-myfeature
@@ -1420,7 +1420,7 @@ git push -u forked user123-myfeature
 <p><a id='or...-Reuse-an-old-branch-1'></a></p>
 <h4 id="or-reuse-an-old-branch">or... Reuse an old branch</h4>
 <p>If you have an ongoing development branch (say, <code>user123-dev</code>) which you'd prefer to use (and which has previously been merged into master!) then you can get that up to date with:</p>
-<div class="code"><pre><span></span>git fetch origin
+<div class="codehilite"><pre><span></span>git fetch origin
 git checkout user123-dev
 git merge --ff-only origin/master
 git push forked user123-dev
@@ -1431,7 +1431,7 @@ git push forked user123-dev
 <p><a id='Write-code-and-commit-1'></a></p>
 <h4 id="write-code-and-commit">Write code and commit</h4>
 <p>After powering up your favorite editor (maybe <a href="http://junolab.org/">Juno</a>?) and making some code changes to the repo, you'll want to "commit" or save a snapshot of all the changes you made.  After committing, you can "push" those changes to your forked repo on Github:</p>
-<div class="code"><pre><span></span>git add src/my_new_file.jl
+<div class="codehilite"><pre><span></span>git add src/my_new_file.jl
 git commit -am &quot;my commit message&quot;
 git push forked user123-dev
 </pre></div>
@@ -1445,7 +1445,7 @@ git push forked user123-dev
 <p><a id='Cleanup-1'></a></p>
 <h4 id="cleanup">Cleanup</h4>
 <p>After all of this, you will likely want to go back to using <code>master</code> (or possibly using a tagged release, once your feature is tagged).  To clean up:</p>
-<div class="code"><pre><span></span>git fetch origin
+<div class="codehilite"><pre><span></span>git fetch origin
 git checkout master
 git merge --ff-only origin/master
 git branch -d user123-dev
@@ -1467,7 +1467,7 @@ git branch -d user123-dev
 <p>Testing in Plots is done with the help of <a href="https://github.com/JuliaPlots/VisualRegressionTests.jl">VisualRegressionTests</a>.  Reference images are stored in <a href="https://github.com/JuliaPlots/PlotReferenceImages.jl">PlotReferenceImages</a>. Sometimes the reference images need to be updated (if features change, or if the underlying backend changes).  VisualRegressionTests makes it somewhat painless to update the reference images:</p>
 <p>From the Julia REPL, run <code>include(Pkg.dir("Plots","test","runtests.jl"))</code>.  This will try to plot the tests, and then compare the results to the stored reference images.  If the test output is sufficiently different than the reference output (using Tim Holy's excellent algorithm for the comparison), then a GTK window will pop up with a side-by-side comparison.  You can choose to replace the reference image, or not, depending on whether a real error was discovered.</p>
 <p>After the reference images have been updated, navigate to PlotReferenceImages and push the changes to Github:</p>
-<div class="code"><pre><span></span>cd ~/.julia/v0.5/PlotReferenceImages
+<div class="codehilite"><pre><span></span>cd ~/.julia/v0.5/PlotReferenceImages
 git add Plots/*
 git commit -am &quot;a useful message&quot;
 git push

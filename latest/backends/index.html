@@ -541,8 +541,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
-      PyPlot
+    <a href="../examples/gr/" title="GR" class="md-nav__link">
+      GR
     </a>
   </li>
 
@@ -553,8 +553,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/gr/" title="GR" class="md-nav__link">
-      GR
+    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
+      PyPlot
     </a>
   </li>
 
@@ -642,10 +642,10 @@
                   <a href="https://github.com/JuliaPlots/PlotDocs.jl/blob/master/docs/src/backends.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <p><a id='Backends-1'></a></p>
+                <p><a id='backends-1'></a></p>
 <h1 id="backends">Backends</h1>
-<p>Backends are the lifeblood of Plots, and the diversity between features, approaches, and strengths/weaknesses was  one of the primary reasons that I started this package.</p>
-<p>For those who haven't had the pleasure of hacking on 15 different plotting APIs:  First, consider yourself lucky.  However, you will probably have a hard time choosing the right backend for your task at hand.  This document is meant to be a guide and  introduction to making that choice.</p>
+<p>Backends are the lifeblood of Plots, and the diversity between features, approaches, and strengths/weaknesses was one of the primary reasons that I started this package.</p>
+<p>For those who haven't had the pleasure of hacking on 15 different plotting APIs:  First, consider yourself lucky.  However, you will probably have a hard time choosing the right backend for your task at hand.  This document is meant to be a guide and introduction to making that choice.</p>
 <p><a id='For-the-impatient-1'></a></p>
 <h1 id="for-the-impatient">For the impatient</h1>
 <p>My favorites: GR for speed, Plotly(JS) for interactivity, PyPlot otherwise.</p>
@@ -700,7 +700,7 @@
 <p><a id='<a href="https://github.com/stevengj/PyPlot.jl">PyPlot</a>-1'></a></p>
 <h3 id="pyplot"><a href="https://github.com/stevengj/PyPlot.jl">PyPlot</a></h3>
 <p>A Julia wrapper around the popular python package PyPlot (Matplotlib).  It uses PyCall.jl to pass data with minimal overhead.</p>
-<p><img alt="" src="../examples/img/pyplot/pyplot_example_22.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/pyplot/ref22.png" /></p>
 <p>Pros:</p>
 <ul>
 <li>Tons of functionality</li>
@@ -720,7 +720,7 @@
 <h3 id="plotly-plotlyjs"><a href="https://github.com/spencerlyon2/PlotlyJS.jl">Plotly / PlotlyJS</a></h3>
 <p>These are treated as separate backends, though they share much of the code and use the Plotly javascript API.  <code>plotly()</code> is the only dependency-free plotting option, as the required javascript is bundled with Plots.  It can create inline plots in IJulia, or open standalone browser windows when run from the Julia REPL.</p>
 <p><code>plotlyjs()</code> is the preferred option, and taps into the great functionality of Spencer Lyon's PlotlyJS.jl.  Inline IJulia plots can be updated from any cell... something that makes this backend stand out.  From the Julia REPL, it taps into Blink.jl and Electron to plot within a standalone GUI window... also very cool. Also, PlotlyJS supports saving the output to more formats than Plotly, such as EPS and PDF, and thus is the recommended version of Plotly for developing publication-quality figures.</p>
-<p><img alt="" src="../examples/img/plotlyjs/plotlyjs_example_28.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/plotlyjs/ref28.png" /></p>
 <p>Pros:</p>
 <ul>
 <li><a href="https://plot.ly/javascript/">Tons of functionality</a></li>
@@ -738,7 +738,7 @@
 <p><a id='<a href="https://github.com/jheinen/GR.jl">GR</a>-1'></a></p>
 <h3 id="gr"><a href="https://github.com/jheinen/GR.jl">GR</a></h3>
 <p>Super fast with lots of plot types.  Still actively developed and improving daily.</p>
-<p><img alt="" src="../examples/img/gr/gr_example_24.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/gr/ref24.png" /></p>
 <p>Pros:</p>
 <ul>
 <li>Speed</li>
@@ -754,7 +754,7 @@
 <p><a id='<a href="https://github.com/Evizero/UnicodePlots.jl">UnicodePlots</a>-1'></a></p>
 <h3 id="unicodeplots"><a href="https://github.com/Evizero/UnicodePlots.jl">UnicodePlots</a></h3>
 <p>Simple and lightweight.  Plot directly in your terminal.  You won't produce anything publication quality, but for a quick look at your data it is awesome.</p>
-<p><img alt="" src="../examples/img/unicodeplots/unicodeplots_example_3.png" /></p>
+<p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/unicodeplots/ref3.png" /></p>
 <p>Pros:</p>
 <ul>
 <li>Minimal dependencies</li>
@@ -819,14 +819,14 @@
 <p>Write plot + data to a <em>single</em> <code>HDF5</code> file using a human-readable structure that can easily be reverse-engineered.</p>
 <p><img alt="" src="../examples/img/hdf5_samplestruct.png" /></p>
 <p><strong>Write to .hdf5 file</strong></p>
-<div class="code"><pre><span></span>hdf5() #Select HDF5-Plots &quot;backend&quot;
+<div class="codehilite"><pre><span></span>hdf5() #Select HDF5-Plots &quot;backend&quot;
 p = plot(...) #Construct plot as usual
 Plots.hdf5plot_write(p, &quot;plotsave.hdf5&quot;)
 </pre></div>
 
 
 <p><strong>Read from .hdf5 file</strong></p>
-<div class="code"><pre><span></span>pyplot() #Must first select some backend
+<div class="codehilite"><pre><span></span>pyplot() #Must first select some backend
 pread = Plots.hdf5plot_read(&quot;plotsave.hdf5&quot;)
 display(pread)
 </pre></div>

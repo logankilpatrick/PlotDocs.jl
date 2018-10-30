@@ -611,8 +611,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
-      PyPlot
+    <a href="../examples/gr/" title="GR" class="md-nav__link">
+      GR
     </a>
   </li>
 
@@ -623,8 +623,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/gr/" title="GR" class="md-nav__link">
-      GR
+    <a href="../examples/pyplot/" title="PyPlot" class="md-nav__link">
+      PyPlot
     </a>
   </li>
 
@@ -769,7 +769,7 @@
                   <a href="https://github.com/JuliaPlots/PlotDocs.jl/blob/master/docs/src/output.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <p><a id='Output-1'></a></p>
+                <p><a id='output-1'></a></p>
 <h1 id="output">Output</h1>
 <p><strong>A Plot is only displayed when returned</strong> (a semicolon will suppress the return), or if explicitly displayed with <code>display(plt)</code>, <code>gui()</code>, or by adding <code>show = true</code> to your plot command.</p>
 <div style="background-color: lightblue; padding: 10px; border-style: solid; border-width: medium; margin: 10px;"> Tip: You can have MATLAB-like interactive behavior by setting the default value: default(show = true) </div>
@@ -780,7 +780,7 @@
 <p><a id='Jupyter-/-IJulia-1'></a></p>
 <h3 id="jupyter-ijulia">Jupyter / IJulia</h3>
 <p>Plots are shown inline when returned to a cell.  The default output format can be changed by the <code>html_output_format</code> attribute, with alias <code>fmt</code>:</p>
-<div class="code"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">fmt</span> <span class="o">=</span> <span class="o">:</span><span class="n">png</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">fmt</span> <span class="o">=</span> <span class="o">:</span><span class="n">png</span><span class="p">)</span>
 </pre></div>
 
 
@@ -791,13 +791,13 @@
 <p><a id='savefig-/-format-1'></a></p>
 <h3 id="savefig-format">savefig / format</h3>
 <p>Plots support 2 different versions per save-command. Command <code>savefig</code> chooses file type automatically based on the file extension.</p>
-<div class="code"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the most recent fig as fn</span>
+<div class="codehilite"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the most recent fig as fn</span>
 <span class="n">savefig</span><span class="p">(</span><span class="n">plot_ref</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="c"># save the fig referenced by plot_ref as fn</span>
 </pre></div>
 
 
 <p>In addition, Plots offers shorthands like <code>png(fn)</code>, etc. In this case the string fn containing the filename does not need a file extension.</p>
-<div class="code"><pre><span></span><span class="n">png</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the current fig as png with filename fn</span>
+<div class="codehilite"><pre><span></span><span class="n">png</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="c"># save the current fig as png with filename fn</span>
 <span class="n">png</span><span class="p">(</span><span class="n">plot_ref</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="c"># save the fig referenced by plot_ref as png with filename fn</span>
 </pre></div>
 
