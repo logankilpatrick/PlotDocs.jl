@@ -986,18 +986,18 @@
 <li>New series types via <strong>series recipes</strong>.</li>
 </ol>
 <p>Writing your own recipes is an advanced topic described on the <a href="../recipes/#recipes-1">recipes page</a>. Instead, we will introduce the ways that one uses a recipe.</p>
-<p>Recipes are included in many recipe libraries. Two fundamental recipe libraries are <a href="https://github.com/JuliaPlots/PlotRecipes.jl">PlotRecipes.jl</a> and <a href="https://github.com/JuliaPlots/StatPlots.jl">StatPlots.jl</a>. Let's look into StatPlots.jl. StatPlots.jl adds a bunch of recipes, but the ones we'll focus on are:</p>
+<p>Recipes are included in many recipe libraries. Two fundamental recipe libraries are <a href="https://github.com/JuliaPlots/PlotRecipes.jl">PlotRecipes.jl</a> and <a href="https://github.com/JuliaPlots/StatsPlots.jl">StatsPlots.jl</a>. Let's look into StatsPlots.jl. StatsPlots.jl adds a bunch of recipes, but the ones we'll focus on are:</p>
 <ol>
 <li>It adds a type recipe for <code>Distribution</code>s.</li>
 <li>It adds a plot recipe for marginal histograms.</li>
 <li>It adds a bunch of new statistical plot series.</li>
 </ol>
-<p>Besides recipes, StatPlots.jl also provides a specialized macro from plotting directly from data tables.</p>
+<p>Besides recipes, StatsPlots.jl also provides a specialized macro from plotting directly from data tables.</p>
 <p><a id='Using-User-Recipes-1'></a></p>
 <h3 id="using-user-recipes">Using User Recipes</h3>
-<p>A user recipe says how to interpret plotting commands on a new data type. In this case, StatPlots.jl thus has a macro <code>@df</code> which allows you to plot a <code>DataFrame</code> directly by using the column names. Let's build a <code>DataFrame</code> with columns <code>a</code>, <code>b</code>, and <code>c</code>, and tell Plots.jl to use <code>a</code> as the <code>x</code> axis and plot the series defined by columns <code>b</code> and <code>c</code>:</p>
-<div class="codehilite"><pre><span></span><span class="c"># Pkg.add(&quot;StatPlots&quot;)</span>
-<span class="k">using</span> <span class="n">StatPlots</span> <span class="c"># Required for the DataFrame user recipe</span>
+<p>A user recipe says how to interpret plotting commands on a new data type. In this case, StatsPlots.jl thus has a macro <code>@df</code> which allows you to plot a <code>DataFrame</code> directly by using the column names. Let's build a <code>DataFrame</code> with columns <code>a</code>, <code>b</code>, and <code>c</code>, and tell Plots.jl to use <code>a</code> as the <code>x</code> axis and plot the series defined by columns <code>b</code> and <code>c</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c"># Pkg.add(&quot;StatsPlots&quot;)</span>
+<span class="k">using</span> <span class="n">StatsPlots</span> <span class="c"># Required for the DataFrame user recipe</span>
 <span class="c"># Now let&#39;s create the DataFrame</span>
 <span class="k">using</span> <span class="n">DataFrames</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
@@ -1015,7 +1015,7 @@
 <p><img alt="dataframescatterplot" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/tutorial/user_recipes_2.png" /></p>
 <p><a id='Using-a-Type-Recipe-1'></a></p>
 <h3 id="using-a-type-recipe">Using a Type Recipe</h3>
-<p>In addition, StatPlots.jl extends Distributions.jl by adding a type recipe for its distribution types, so they can be directly interpreted as plotting data:</p>
+<p>In addition, StatsPlots.jl extends Distributions.jl by adding a type recipe for its distribution types, so they can be directly interpreted as plotting data:</p>
 <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Distributions</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
@@ -1025,7 +1025,7 @@
 <p>Thus type recipes are a very convenient way to plot a specialized type which requires no more intervention!</p>
 <p><a id='Using-Plot-Recipes-1'></a></p>
 <h3 id="using-plot-recipes">Using Plot Recipes</h3>
-<p>StatPlots.jl adds the <code>marginhist</code> multiplot via a plot recipe. For our data we will pull in the famous <code>iris</code> dataset from RDatasets:</p>
+<p>StatsPlots.jl adds the <code>marginhist</code> multiplot via a plot recipe. For our data we will pull in the famous <code>iris</code> dataset from RDatasets:</p>
 <div class="codehilite"><pre><span></span><span class="c">#Pkg.add(&quot;RDatasets&quot;)</span>
 <span class="k">using</span> <span class="n">RDatasets</span>
 <span class="n">iris</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span><span class="s">&quot;iris&quot;</span><span class="p">)</span>
@@ -1041,7 +1041,7 @@
 <p>This demonstrates two important facts. Notice that this is more than a series since it generates multiple series (i.e. there are multiple plots due to the hists on the top and right). Thus a plot recipe is not just a series but instead something like a new <code>plot</code> command.</p>
 <p><a id='Using-Series-Recipes-1'></a></p>
 <h3 id="using-series-recipes">Using Series Recipes</h3>
-<p>StatPlots.jl also introduces new series recipes. The key is that you don't have to do anything differently: after <code>using StatPlots</code> you can simply use those new series recipes as though they were built into the plotting libraries. Let's use the Violin plot on some random data:</p>
+<p>StatsPlots.jl also introduces new series recipes. The key is that you don't have to do anything differently: after <code>using StatsPlots</code> you can simply use those new series recipes as though they were built into the plotting libraries. Let's use the Violin plot on some random data:</p>
 <div class="codehilite"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c"># Four series of 100 points each</span>
 <span class="n">violin</span><span class="p">([</span><span class="s">&quot;Series 1&quot;</span> <span class="s">&quot;Series 2&quot;</span> <span class="s">&quot;Series 3&quot;</span> <span class="s">&quot;Series 4&quot;</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">leg</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
 </pre></div>

@@ -524,8 +524,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#statplots" title="StatPlots" class="md-nav__link">
-    StatPlots
+  <a href="#statsplots" title="StatsPlots" class="md-nav__link">
+    StatsPlots
   </a>
   
 </li>
@@ -964,8 +964,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#statplots" title="StatPlots" class="md-nav__link">
-    StatPlots
+  <a href="#statsplots" title="StatsPlots" class="md-nav__link">
+    StatsPlots
   </a>
   
 </li>
@@ -1228,7 +1228,7 @@
 <li>Generic types: Plot, Subplot, Axis, Series, ...</li>
 <li>Conveniences: <code>getindex</code>/<code>setindex</code>, <code>push!</code>/<code>append!</code>, <code>unzip</code>, <code>cycle</code>, ...</li>
 </ul>
-<p>This package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.</p>
+<p>This package depends on RecipesBase, PlotUtils, and PlotThemes.  When contributing new functionality/features, you should make best efforts to find a more appropriate home (StatsPlots, PlotUtils, etc) than contributing to core Plots.  In general, the push has been to reduce the size and scope of Plots, when possible, and move features to other packages.</p>
 <p><a id='Backends-1'></a></p>
 <h3 id="backends">Backends</h3>
 <p>In Julia versions v0.5 and earlier, backend code (such as code linking Plots with GR) lived in the <code>Plots/src/backends</code> directory.  As such, backend code should be contributed to core Plots.</p>
@@ -1265,12 +1265,12 @@
 <p><a id='PlotThemes-1'></a></p>
 <h3 id="plotthemes">PlotThemes</h3>
 <p>Visual themes (i.e. attribute defaults) such as "dark", "orange", etc.</p>
-<p><a id='StatPlots-1'></a></p>
-<h3 id="statplots">StatPlots</h3>
+<p><a id='StatsPlots-1'></a></p>
+<h3 id="statsplots">StatsPlots</h3>
 <p>An extension of Plots: Statistical plotting and tabular data.  Complex histograms and densities, correlation plots, and support for DataFrames.  Anything related to stats or special handling for table-like data should live here.</p>
 <p><a id='PlotRecipes-1'></a></p>
 <h3 id="plotrecipes">PlotRecipes</h3>
-<p>An extension of StatPlots: Graphs, maps, and more.  If it's not a "base recipe", and also not clearly "statistical" in nature, then this package might be a good home.</p>
+<p>An extension of StatsPlots: Graphs, maps, and more.  If it's not a "base recipe", and also not clearly "statistical" in nature, then this package might be a good home.</p>
 <p><a id='MLPlots-1'></a></p>
 <h3 id="mlplots">MLPlots</h3>
 <p>An extension of PlotRecipes, geared toward Machine Learning applications: neural nets, spike trains, ROC curves, and more.</p>
@@ -1294,7 +1294,7 @@
 <li><strong>Improve your favorite backend</strong>: There are many missing features and other improvements that can be made to individual backends.  Most issues specific to a backend have a <a href="https://github.com/JuliaPlots/Plots.jl/issues?q=is%3Aissue+is%3Aopen+label%3APlotly">special tag</a>.</li>
 <li><strong>Help with documentation</strong>: This could come in the form of improved descriptions, additional examples, or full tutorials.  Please contribute improvements to <a href="https://github.com/JuliaPlots/PlotDocs.jl">PlotDocs</a>.</li>
 <li><strong>Help with the v0.6 reorganization</strong>: The <a href="#backends">reorg</a> requires the annoying effort of creating new repos (PlotsPyPlot, PlotsPlotlyJS, etc) that hold the backend code.  I consider this intermediate because you need to know a little about Plots and git, but it's fairly straightforward to follow the model of PlotsGR.</li>
-<li><strong>Expand StatPlots functionality</strong>:  qqplot, DataStreams, or anything else you can think of.</li>
+<li><strong>Expand StatsPlots functionality</strong>:  qqplot, DataStreams, or anything else you can think of.</li>
 </ul>
 <p><a id='Advanced-Project-Ideas-1'></a></p>
 <h3 id="advanced-project-ideas">Advanced Project Ideas</h3>
