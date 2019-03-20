@@ -404,6 +404,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#adding-subplots-incrementally" title="Adding Subplots incrementally" class="md-nav__link">
+    Adding Subplots incrementally
+  </a>
+  
+</li>
+      
       
       
       
@@ -682,6 +689,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#adding-subplots-incrementally" title="Adding Subplots incrementally" class="md-nav__link">
+    Adding Subplots incrementally
+  </a>
+  
+</li>
+      
       
       
       
@@ -771,6 +785,9 @@
 
 
 <p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/layout/layout_1.png" /></p>
+<p><a id='Adding-Subplots-incrementally-1'></a></p>
+<h3 id="adding-subplots-incrementally">Adding Subplots incrementally</h3>
+<p>You can also combine multiple plots to a single plot. To do this, simply pass the variables holding the previous plots to the <code>plot</code> function: ```julia l = @layout [a ; b c] p1 = plot(...) p2 = plot(...) p3 = plot(...) plot(p1, p2, p3, layout = l)</p>
                 
                   
                 
