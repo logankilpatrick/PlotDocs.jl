@@ -787,7 +787,13 @@
 <p><img alt="" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/layout/layout_1.png" /></p>
 <p><a id='Adding-Subplots-incrementally-1'></a></p>
 <h3 id="adding-subplots-incrementally">Adding Subplots incrementally</h3>
-<p>You can also combine multiple plots to a single plot. To do this, simply pass the variables holding the previous plots to the <code>plot</code> function: ```julia l = @layout [a ; b c] p1 = plot(...) p2 = plot(...) p3 = plot(...) plot(p1, p2, p3, layout = l)</p>
+<p>You can also combine multiple plots to a single plot. To do this, simply pass the variables holding the previous plots to the <code>plot</code> function:</p>
+<div class="codehilite"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="nd">@layout</span> <span class="p">[</span><span class="n">a</span> <span class="p">;</span> <span class="n">b</span> <span class="n">c</span><span class="p">]</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">l</span><span class="p">)</span>
+</pre></div>
                 
                   
                 
