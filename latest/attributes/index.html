@@ -829,7 +829,15 @@
 
 
 
-wzxhzdk:0
+<div class="codehilite"><pre><span></span>if(document.getElementById){
+    newheight = document.getElementById(id).contentWindow.document .body.scrollHeight;
+    newwidth = document.getElementById(id).contentWindow.document .body.scrollWidth;
+}
+
+document.getElementById(id).height = (newheight) + &quot;px&quot;;
+document.getElementById(id).width = (newwidth) + &quot;px&quot;;
+</pre></div>
+
 
 
 
@@ -861,7 +869,7 @@ Tip: As of this writing, aliases do not work inside recipes!!
 <p>Some arguments encompass smart shorthands for setting many related arguments at the same time.  Plots uses type checking and multiple dispatch to smartly "figure out" which values apply to which argument.  Pass in a tuple of values.  Single values will be first wrapped in a tuple before processing.</p>
 <p><a id='axis-(and-xaxis/yaxis/zaxis)-1'></a></p>
 <h5 id="axis-and-xaxisyaxiszaxis">axis (and xaxis/yaxis/zaxis)</h5>
-<p>Passing a tuple of settings to the <code>xaxis</code> argument will allow the quick definition of <code>xlabel</code>, <code>xlim</code>, <code>xticks</code>, <code>xscale</code>, <code>xflip</code>, and <code>xtickfont</code>.  The following are equivalent:</p>
+<p>Passing a tuple of settings to the <code>xaxis</code> argument will allow the quick definition of <code>xlabel</code>, <code>xlims</code>, <code>xticks</code>, <code>xscale</code>, <code>xflip</code>, and <code>xtickfont</code>.  The following are equivalent:</p>
 <div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">xaxis</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;my label&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="o">:</span><span class="n">log</span><span class="p">,</span> <span class="o">:</span><span class="n">flip</span><span class="p">,</span> <span class="n">font</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s">&quot;Courier&quot;</span><span class="p">)))</span>
 
 <span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&quot;my label&quot;</span><span class="p">,</span>
