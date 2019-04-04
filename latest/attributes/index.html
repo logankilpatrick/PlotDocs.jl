@@ -882,6 +882,12 @@ Tip: As of this writing, aliases do not work inside recipes!!
 
 
 <p>Note that <code>yaxis</code> and <code>zaxis</code> work similarly, and <code>axis</code> will apply to all.</p>
+<p>Passing a tuple to <code>xticks</code> (and similarly to <code>yticks</code> and <code>zticks</code>) changes the position of the ticks and the labels:</p>
+<div class="codehilite"><pre><span></span><span class="n">plot!</span><span class="p">(</span><span class="n">xticks</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="o">:</span><span class="nb">π</span><span class="o">:</span><span class="mi">3</span><span class="o">*</span><span class="nb">π</span><span class="p">;],</span> <span class="p">[</span><span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">pi&quot;</span><span class="p">,</span> <span class="s">&quot;2</span><span class="se">\\</span><span class="s">pi&quot;</span><span class="p">]))</span>
+<span class="n">yticks!</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">;],</span> <span class="p">[</span><span class="s">&quot;min&quot;</span><span class="p">,</span> <span class="s">&quot;zero&quot;</span><span class="p">,</span> <span class="s">&quot;max&quot;</span><span class="p">])</span>
+</pre></div>
+
+
 <p><a id='line-1'></a></p>
 <h5 id="line">line</h5>
 <p>Set attributes corresponding to a series line.  Aliases: <code>l</code>.  The following are equivalent:</p>
