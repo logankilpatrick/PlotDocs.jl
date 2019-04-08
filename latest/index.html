@@ -801,6 +801,31 @@
 
 
 <p><img alt="waves" src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/waves.gif" /></p>
+<p>Decision boundary</p>
+<div class="codehilite"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>  <span class="n">R</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>  <span class="n">N</span> <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">R</span><span class="p">;</span>  <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="o">:</span><span class="mf">0.004</span><span class="o">:</span><span class="mi">1</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">ComplexF64</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="n">mp4</span><span class="p">(</span><span class="nd">@animate</span><span class="p">(</span><span class="k">for</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="o">:</span><span class="mf">0.03</span><span class="o">:</span><span class="mi">13</span>
+    <span class="c"># create a simple classifier to return the region for any point (x, y)</span>
+    <span class="n">midpoints</span> <span class="o">=</span> <span class="n">vec</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">points</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">P</span>
+    <span class="n">classify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">argmin</span><span class="p">(</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="nb">im</span> <span class="o">.-</span> <span class="n">midpoints</span><span class="p">))</span>
+
+    <span class="c"># draw decision boundary and points</span>
+    <span class="n">contour</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">classify</span><span class="p">,</span> <span class="n">c</span><span class="o">=:</span><span class="n">cyclic2</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">nlev</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">leg</span><span class="o">=:</span><span class="n">none</span><span class="p">)</span>
+    <span class="n">scatter!</span><span class="p">(</span><span class="n">reim</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">...</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cvec</span><span class="p">(</span><span class="o">:</span><span class="n">cyclic2</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">lims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c"># update position of points</span>
+    <span class="n">target</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.65</span><span class="o">*</span><span class="n">cis</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span><span class="nb">im</span>
+    <span class="n">points</span><span class="p">[</span><span class="o">:</span><span class="p">]</span> <span class="o">.+=</span> <span class="mf">0.01</span><span class="o">*</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">2</span><span class="nb">π</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">:</span><span class="mi">2</span><span class="nb">π</span><span class="p">)</span> <span class="o">.-</span> <span class="n">points</span><span class="p">[</span><span class="o">:</span><span class="p">])</span>
+<span class="k">end</span><span class="p">),</span> <span class="s">&quot;decision.mp4&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+
+<video width="600" height="400" controls loop poster="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/decision-poster.png">
+  <source src="https://raw.githubusercontent.com/JuliaPlots/PlotReferenceImages.jl/master/PlotDocs/index/decision.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 <p>Iris Dataset</p>
 <div class="codehilite"><pre><span></span><span class="c"># load a dataset</span>
 <span class="k">using</span> <span class="n">RDatasets</span>
