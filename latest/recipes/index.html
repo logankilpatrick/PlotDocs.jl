@@ -994,6 +994,7 @@
 <li>The special operator <code>:=</code> turns <code>seriestype := :path</code> into <code>plotattributes[:seriestype] = :path</code>, forcing that attribute value.  (Tip: Wrap the right hand side in parentheses for complex expressions.)</li>
 <li>The return value of the recipe is the <code>args</code> of a <code>RecipeData</code> object, which also has a reference to the attribute dictionary.</li>
 <li>A recipe returns a Vector{RecipeData}.  We'll see how to add to this list later with the <code>@series</code> macro.</li>
+<li>One cannot use aliases (such as <code>colour</code> or <code>alpha</code>) in a recipe, only the full attribute name.</li>
 </ul>
 <p>Breaking down the example:</p>
 <p>In the example above, we use <code>MyType</code> for dispatch, with optional positional argument <code>n::Integer</code>:</p>
